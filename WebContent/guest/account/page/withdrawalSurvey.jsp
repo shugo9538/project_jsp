@@ -21,7 +21,7 @@
     <section>
         <h1>회원 탈퇴</h1>
         설문조사 탈퇴 사유를 체크해주세요.
-        <form class="" action="withdrawalAction.gu" method="post">
+        <form class="" action="withdrawalComplete.gu" method="post">
             <table>
                 <tr>
                     <td>

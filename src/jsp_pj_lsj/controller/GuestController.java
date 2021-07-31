@@ -50,14 +50,14 @@ public class GuestController extends HttpServlet {
         } else if (url.equals("/signIn.gu")) {
             System.out.println("[url ==> ]" + url);
             
-            viewPage = "/guest/account/signIn.jsp";
+            viewPage = "/guest/account/page/signIn.jsp";
             
         // 회원가입 처리
         } else if (url.equals("/signInAction.gu")) {
             System.out.println("[url ==> ]" + url);
             service.signInAction(req, res);
             
-            viewPage = "/guest/account/signInAction.jsp";
+            viewPage = "/guest/account/action/signInAction.jsp";
         
         // 회원가입 완료 후 이동
         } else if (url.equals("/signInComplete.gu")) {
@@ -69,14 +69,14 @@ public class GuestController extends HttpServlet {
         } else if (url.equals("/login.gu")) {
             System.out.println("[url ==> ]" + url);
             
-            viewPage = "/guest/account/login.jsp";
+            viewPage = "/guest/account/page/login.jsp";
             
         // 로그인 처리
         } else if (url.equals("/loginAction.gu")) {
             System.out.println("[url ==> ]" + url);
             service.loginAction(req, res);
             
-            viewPage = "/guest/account/loginAction.jsp";
+            viewPage = "/guest/account/action/loginAction.jsp";
             
         // 로그인 완료 후 세션 적용과 이동
         } else if (url.equals("/loginComplete.gu")) {
@@ -96,43 +96,49 @@ public class GuestController extends HttpServlet {
         } else if (url.equals("/editInfo.gu")) {
             System.out.println("[url ==> ]" + url);
             
-            viewPage = "/guest/account/editInfo.jsp";
+            viewPage = "/guest/account/page/editInfo.jsp";
             
         // 회원정보 수정 처리
         } else if (url.equals("/editInfoAction.gu")) {
             System.out.println("[url ==> ]" + url);
             service.editAction(req, res);
             
-            viewPage = "/guest/account/editInfoAction.jsp";
+            viewPage = "/guest/account/action/editInfoAction.jsp";
             
+        // 회원정보 완료 후 수정화면으로 다시 이동
         } else if (url.equals("/editInfoComplete.gu")) {
             System.out.println("[url ==> ]" + url);
             service.editComplete(req, res);
             
-            viewPage = "/guest/account/editInfo.jsp";
+            viewPage = "/guest/account/page/editInfo.jsp";
             
-        } else if (url.equals("/editInfoComplete.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.editComplete(req, res);
-            
-            viewPage = "/guest/account/editInfo.jsp";
-            
+        // 이름수정화면
         } else if (url.equals("/editName.gu")) {
             System.out.println("[url ==> ]" + url);
             
-            viewPage = "/guest/account/editName.jsp";
+            viewPage = "/guest/account/page/editName.jsp";
             
+        // 회원 탈퇴 화면
         } else if (url.equals("/withdrawal.gu")) {
             System.out.println("[url ==> ]" + url);
             
-            viewPage = "/guest/account/withdrawal.jsp";
+            viewPage = "/guest/account/page/withdrawal.jsp";
             
+        // 회원탈퇴전 마지막 비밀번호 확인
+        } else if (url.equals("/withdrawalAction.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.confirmPw(req, res);
+            
+            viewPage = "/guest/account/action/withdrawalAction.jsp";
+            
+        // 회원탈퇴전 설문조사
         } else if (url.equals("/withdrawalSurvey.gu")) {
             System.out.println("[url ==> ]" + url);
             
-            viewPage = "/guest/account/withdrawalSurvey.jsp";
+            viewPage = "/guest/account/page/withdrawalSurvey.jsp";
             
-        } else if (url.equals("/withdrawalAction.gu")) {
+        // 탈퇴 후 메인 화면으로 이동
+        } else if (url.equals("/withdrawalComplete.gu")) {
             System.out.println("[url ==> ]" + url);
             service.deleteAction(req, res);
             

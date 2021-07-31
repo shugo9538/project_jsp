@@ -23,4 +23,6 @@ public interface GuestService {
     // 회원정보 수정 완료
     public void editComplete(HttpServletRequest req, HttpServletResponse res);
     
+    // 비밀번호 확인
+    public void confirmPw(HttpServletRequest req, HttpServletResponse res);
 }

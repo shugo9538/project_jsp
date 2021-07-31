@@ -97,11 +97,11 @@ function setName() {
     self.close();
 }
 
-//function formChk() {
-//    if () {
-//        
-//        return false;
-//    }
-//    
-//    window.location='withdrawalSurbey.gu'
-//}
+function formChk() {
+    if () {
+        
+        return false;
+    }
+    
+    window.location='withdrawalSurbey.gu'
+}

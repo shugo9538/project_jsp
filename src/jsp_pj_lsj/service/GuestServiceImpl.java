@@ -122,4 +122,23 @@ public class GuestServiceImpl implements GuestService {
         // 업데이트 결과
         req.getSession().setAttribute("vo", vo);
     }
+
+    @Override
+    public void confirmPw(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("SERVICE : editComplete");
+        
+        // 비밀번호 확인
+        int chkPW = 0;
+        vo = (UserVO) req.getSession().getAttribute("vo");
+        String pw = vo.getPw();
+        String inputPw = req.getParameter("pw");
+        
+        // 업데이트 요청
+        if (pw.equals(inputPw)) chkPW = 1;
+        
+        // 업데이트 결과
+        req.setAttribute("chkPW", chkPW);
+        
+    }
+    
 }
