@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Goupang</title>
+  <link rel="stylesheet" href="../../common/css/default.css">
+  <link rel="stylesheet" href="../../common/css/header.css">
+  <link rel="stylesheet" href="../../common/css/nav.css">
+  <link rel="stylesheet" href="../../common/css/section.css">
+  <link rel="stylesheet" href="../../common/css/footer.css">
+  <link rel="stylesheet" href="../../common/css/sidebar.css">
+  <link rel="stylesheet" href="../css/productList.css">
+  <link rel="stylesheet" href="../css/inquire.css">
+  <script src="https://kit.fontawesome.com/a9dbc227eb.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- header -->
+  <header id="top">
+    <div class="user_state">
+      user님
+      <a href="#">
+        로그인
+      </a>
+      <a href="#">
+        회원가입
+      </a>
+      <a href="#">
+        로그아웃
+      </a>
+      <a href="../inquireList.html">
+        고객센터
+      </a>
+    </div>
+  </header>
+  <!-- header end -->
+
+  <!-- nav -->
+  <nav class="nav">
+    <!-- nav_category -->
+    <ul class="nav_category">
+      <li>
+        <i class="fas fa-bars">
+        </i>
+        카테고리
+      </li>
+      <li>
+        <ul>
+          <li><a href="../product/productList.html">과일</a></li>
+          <li><a href="#">야채</a></li>
+          <li><a href="#">육류</a></li>
+          <li><a href="#">유제품</a></li>
+          <li><a href="#">음료</a></li>
+        </ul>
+      </li>
+    </ul>
+    <!-- nav_category end -->
+    <!-- nav_logo -->
+    <div class="nav_logo">
+      <a href="../../index.html"><img src="../../common/img/coupang_logo.png" alt="이미지" width="120px"></a>
+    </div>
+    <!-- nav_logo end -->
+    <!-- nav_search -->
+    <div class="nav_search">
+      <input type="text" class="input" id="search" size="40">
+      <input type="submit" class="btn_search" value="검색" width="75px" style="border:1px solid"></input>
+    </div>
+    <!-- nav_search end -->
+    <!-- nav_service -->
+    <div class="nav_service">
+      <a href="myOrders.html">
+        <i class="fas fa-user"></i>
+      </a>
+      <a href="#">
+        <i class="fas fa-shopping-cart"></i>
+      </a>
+    </div>
+    <!-- nav_service end -->
+  </nav>
+  <!-- nav end -->
+  <section>
+    <div class="content_width">
+      <div class="titleline">
+        <i class="fas fa-shopping-cart">
+          장바구니
+        </i>
+        <ul>
+          <li>
+            <b>장바구니</b>
+            >
+          </li>
+          <li>
+            주문/결제
+            >
+          </li>
+          <li>
+            주문완료
+          </li>
+        </ul>
+      </div>
+      <hr>
+
+      <div class="cart">
+        <table>
+          <tr>
+            <th>
+              <input type="checkbox" name="" value="">
+              <label for="">전체선택</label>
+            </th>
+            <th>
+              상품정보
+            </th>
+            <th>
+              상품금액
+            </th>
+            <th>
+              배송비
+            </th>
+          </tr>
+          <!-- content -->
+          <tr>
+            <td rowspan="2">
+              <input type="checkbox" name="" value="">
+              <label for="">
+                img
+              </label>
+            </td>
+            <td>
+              충주사과
+            </td>
+            <td rowspan="2">
+              12,900원
+            </td>
+            <td rowspan="2">
+              무료
+            </td>
+          </tr>
+          <tr>
+            <td>
+              7/15까지 도착 보장
+              <select class="" name="">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+              12,900원
+              <input type="button" name="" value="X">
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div border="1px solid">
+      <table>
+        <tr>
+          <td>
+            총 상품 가격 15,900원 + 배송비 0원 = 총 주문금액 15,900원
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="pager">
+      <ul>
+        <li>
+          <button type="button" name="button">
+            <a href="../../index.html">
+              계속 쇼핑하기
+            </a>
+          </button>
+        </li>
+        <li>
+          <button type="button" name="button">
+            <a href="../order/order.html">
+              구매하기
+            </a>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- footer -->
+  <footer>
+    <hr>
+    <div class="company_info">
+      <div>
+        구팡(주) | 대표이사 : 강한승,박대준 <br>
+        서울시 송파구 송파대로 570 <br>
+        사업자 등록번호 : 120-88-00767 <br>
+        통신판매업신고 : 2017-서울송파-0680
+      </div>
+      <div>
+        365고객센터 | 전자금융거래분쟁처리담당<br>
+        <span>1577-7011</span><br>
+        서울시 송파구 송파대로 570<br>
+        email : help@coupang.com
+      </div>
+    </div>
+    <div class="footer_copyright">
+      사이버몰 내 판매되는 상품 중에는 구팡에 등록한 개별 판매자가 판매하는 마켓플레이스(오픈마켓) 상품이 포함되어 있습니다.
+      마켓플레이스(오픈마켓) 상품의 경우 구팡은 통신판매중개자이며 통신판매의 당사자가 아닙니다.
+      구팡은 마켓플레이스(오픈마켓) 상품, 거래정보 및 거래 등에 대하여 책임을 지지 않습니다.
+      구팡은 소비자 보호와 안전거래를 위해 신뢰관리센터(CM112@coupang.com)를 운영하고 있으며, 관련 분쟁이 발생할 경우 별도의 분쟁 처리절차에 의거 분쟁이 처리됩니다.
+      Copyright © Coupang Corp. 2010-2020 All Rights Reserved.
+    </div>
+  </footer>
+  <!-- footer end -->
+</body>
+
+</html>

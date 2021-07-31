@@ -1,0 +1,14 @@
+@charset "UTF-8";
+.shippingAdd_list {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+}
+
+@media screen and (max-width: 768px) {
+  .shippingAdd_list {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+  }
+}

@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+.inquire_list {
+  width: 800px;
+  text-align: -webkit-center;
+}
+
+.inquire_list td {
+  text-align: center;
+  font-size: 1em;
+}
+
+.inquire_list th {
+  font-size: 1em;
+}
+
+.sub_menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.inquire {
+  width: 600px;
+}
+
+.inquire table {
+  width: 600px;
+}
+
+.inquire table th, td {
+  border: 1px solid;
+  text-align: -webkit-center;
+}
+
+.review table {
+  width: 460px;
+}
+
+.pager ul {
+  display: flex;
+  justify-content: center;
+}
+
+.pager button {
+  margin: 0;
+  padding: 0;
+  height: 2em;
+}
+
+.pager button a {
+  font-size: 1.4em;
+}
+
+.cart {
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  font-size: 1em;
+}
+
+.cart table {
+  min-width: 800px;
+}
+
+.cart table tr:nth-child(n+2) {
+  font-size: 1.5em;
+}
+
+.refund th, .refund td {
+  border: 1px solid;
+  font-size: 0.9em;
+}
+
+@media screen and (max-width: 768px) {
+  .inquire_list {
+    width: 400px;
+    text-align: -webkit-center;
+  }
+
+  .inquire_list td {
+    text-align: center;
+    font-size: 1em;
+  }
+
+  .inquire_list th {
+    font-size: 1em;
+  }
+
+  .inquire {
+    width: 400px;
+  }
+
+  .inquire table {
+    width: 400px;
+  }
+
+  .review table {
+    width: 400px;
+  }
+
+  .pager button {
+    margin: 0;
+    padding: 0;
+    height: 1em;
+  }
+
+  .pager button a {
+    font-size: 1em;
+  }
+
+  .cart {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    font-size: 1em;
+  }
+
+  .cart table {
+    min-width: 400px;
+  }
+
+  .cart table tr:nth-child(n+2) {
+    font-size: 1em;
+  }
+}

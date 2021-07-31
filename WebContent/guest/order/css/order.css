@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.order_content {
+  width: 800px;
+}
+
+.order_content table {
+  width: 800px;
+}
+
+.order_content table table {
+  width: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .order_content {
+    width: 400px;
+  }
+
+  .order_content table {
+    width: 400px;
+  }
+}

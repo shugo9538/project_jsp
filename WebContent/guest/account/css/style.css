@@ -1,0 +1,194 @@
+@charset "UTF-8";
+
+form {
+    display: table-cell;
+    text-align: center;
+}
+
+i[class^="fa"] {
+    font-size: 21px;
+}
+
+.account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 21px;
+}
+
+.accountForm {
+    width: 460px;
+}
+
+.accountForm fieldset {
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+.accountForm table {
+    width: 100%;
+}
+
+.accountForm th, td {
+    border: 1px solid gray;
+}
+
+.accountForm td:first-child {
+    border: 0px;
+}
+
+.accountForm table input {
+    width: 80%;
+    font-size: 21px;
+    padding: 16px 0px 12px;
+    border: 0px;
+}
+
+.accountForm table input[type="checkbox"] {
+    width: auto; 
+    padding : 16px 0px 12px;
+    border: 0px;
+    padding: 16px 0px 12px;
+}
+
+.accountForm table input[type="submit"]:nth-last-child(2) {
+    width: 100%;
+}
+
+.accountForm table input:last-child {
+    width: 100%;
+}
+
+#btn {
+    border: 1px solid black;
+}
+
+#telChecker {
+    visibility: hidden;
+    font-size: 16px;
+    color: red;
+    font-style: bold;
+}
+
+.other_chk {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.finder {
+    width: auto;
+    display: flex;
+    font-size: 16px;
+}
+
+.finder label {
+    width: 90px;
+    font-size: 16px;
+}
+
+.finder div:hover {
+    text-decoration: underline;
+    background: skyblue;
+    color: white;
+    cursor: pointer;
+}
+
+form {
+    display: table-cell;
+    text-align: center;
+}
+
+i[class^="fa"] {
+    font-size: 21px;
+}
+
+.editForm {
+    width: 980px;
+}
+
+.editForm fieldset {
+    margin: 0;
+    border: 0;
+}
+
+.editForm table {
+    width: 100%;
+}
+
+.editForm td {
+    border: 0;
+    text-align: left;
+    font-size: 18px;
+}
+
+.editForm td:first-child {
+    text-align-last: right;
+}
+
+.editForm tr:last-child td {
+    text-align-last: center;
+}
+
+.editForm table input {
+    width: auto;
+    height: 35px;
+    font-size: 18px;
+    text-align: center;
+    border: 1px solid gray;
+}
+
+.editForm table button {
+    width: 140px;
+    font-size: 18px;
+    height: 35px;
+    text-align: center;
+    border: 1px solid gray;
+}
+
+.editForm table input[type="checkbox"] {
+    width: 21px;
+    border: 0px;
+    padding: 16px 0px 12px;
+}
+
+.editForm table table {
+    width: auto;
+    font-size: 21px;
+    padding: 16px 0px 12px;
+    border: 0px;
+}
+
+.editForm table table td {
+    width: auto;
+    font-size: 15px;
+    border: 0px;
+}
+
+@media screen and (max-width: 768px) {
+    i[class^="fa"] {
+        font-size: 1em;
+    }
+    .login {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 1em;
+    }
+    .signup button {
+        font-size: 1em;
+    }
+    .other_chk {
+        display: flex;
+        justify-content: space-between;
+    }
+}

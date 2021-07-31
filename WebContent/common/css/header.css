@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+header {
+    width: 1000px;
+    height: 32px;
+    font-size: 13px;
+    
+}
+
+.user_state ul {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px;
+}
+
+.user_state ul li {
+    margin: 5px;
+    font-family: monospace;
+}
+.user_state ul li:hover {
+    text-decoration: underline;
+    background: skyblue;
+    color: white;
+    cursor: pointer;
+}
+
+.user_state ul b {
+    margin: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        width: 400px;
+        font-size: 1em;
+    }
+}

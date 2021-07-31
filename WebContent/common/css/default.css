@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+/* 기본 속성 */
+html {
+  height: auto;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: calc(100vh - 100px);
+  margin-bottom: -100px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+table, th, td {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+hr {
+  width: 100%;
+}
+
+b {
+  color: blue;
+}
+
+h3 {
+  margin: 0;
+}
+
+td i {
+  margin-left: 45%;
+  margin-right: 45%;
+}
