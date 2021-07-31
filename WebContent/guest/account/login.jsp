@@ -61,7 +61,7 @@
             </fieldset>
         </form>
         <div class="signup">
-            <button type="button" id="move_signup" onclick="windo.location.='signIn.gu'">회원가입</button>
+            <button type="button" id="move_signup" onclick="window.location='signIn.gu'">회원가입</button>
         </div>
         <div class="login_copyrihgt">@Goupang Corp. All rights reserved.</div>
     </div>

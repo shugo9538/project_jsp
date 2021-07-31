@@ -35,9 +35,10 @@ function telCheck() {
 
 function editName() {
     var name = document.editForm.reName.value;
-    var url = "editName.do?id=" + name;
-    window.open(url, "confirm", "menu=no, width=500, height=400");
+    var url = "editName.gu?id=" + name;
+    window.open(url, "confirm", "menu=no, width=300, height=100");
 }
+
 function checkAlert() {
     var checkBox = document.getElementById("checkAlert");
     if (checkBox.value == true) checkBox.checked;
@@ -89,11 +90,18 @@ function editTelCheck() {
     }
 }
 
-function formChk() {
-    if () {
-        
-        return false;
-    }
-    
-    window.location='withdrawalSurbey.gu'
+function setName() {
+    var name = document.editNameForm.reName.value
+    opener.document.editForm.name.value = name;
+    opener.alert("성공적으로 수정했습니다.");
+    self.close();
 }
+
+//function formChk() {
+//    if () {
+//        
+//        return false;
+//    }
+//    
+//    window.location='withdrawalSurbey.gu'
+//}

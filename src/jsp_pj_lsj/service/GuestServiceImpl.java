@@ -90,11 +90,14 @@ public class GuestServiceImpl implements GuestService {
         
         // 수정 항목 받아와서 적용
         UserVO updateVO = (UserVO) req.getSession().getAttribute("vo");
-        updateVO.setPw(req.getParameter("rePw1")); 
+        updateVO.setName(req.getParameter("name"));
+        if (req.getParameter("rePw1") != null) {
+            updateVO.setPw(req.getParameter("rePw1")); 
+        }
+        
         boolean b = (req.getParameter("checkAlert") == "1") ? true : false;
         updateVO.setAlertChk(b); 
         updateVO.setTel(req.getParameter("reTel")); 
-        updateVO.setPw(req.getParameter("rePw1")); 
         
         System.out.println("alert : " + updateVO.isAlertChk());
         
@@ -119,6 +122,4 @@ public class GuestServiceImpl implements GuestService {
         // 업데이트 결과
         req.getSession().setAttribute("vo", vo);
     }
-    
-    
 }

@@ -154,7 +154,7 @@ i[class^="fa"] {
 .editForm table input[type="checkbox"] {
     width: 21px;
     border: 0px;
-    padding: 16px 0px 12px;
+    margin: 0;
 }
 
 .editForm table table {
@@ -168,6 +168,18 @@ i[class^="fa"] {
     width: auto;
     font-size: 15px;
     border: 0px;
+}
+
+.checkBoxForm {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+}
+
+.checkBoxForm div {
+    font-size: 14px;
+    margin: 0;
+    align-self: center;
 }
 
 @media screen and (max-width: 768px) {

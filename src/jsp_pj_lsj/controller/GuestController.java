@@ -111,6 +111,17 @@ public class GuestController extends HttpServlet {
             
             viewPage = "/guest/account/editInfo.jsp";
             
+        } else if (url.equals("/editInfoComplete.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.editComplete(req, res);
+            
+            viewPage = "/guest/account/editInfo.jsp";
+            
+        } else if (url.equals("/editName.gu")) {
+            System.out.println("[url ==> ]" + url);
+            
+            viewPage = "/guest/account/editName.jsp";
+            
         } else if (url.equals("/withdrawal.gu")) {
             System.out.println("[url ==> ]" + url);
             
