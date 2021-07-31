@@ -19,7 +19,9 @@
     <%@ include file="/common/jsp/header.jsp"%>
     <%@ include file="/common/jsp/nav.jsp"%>
     <section class="edit_info">
-        <form class="editForm" name="editForm" action="editInfoAction" method="post" onsubmit="return editFormCheck();">
+        <form class="editForm" name="editForm" action="editInfoAction.gu" method="post"
+            onsubmit="return editFormCheck();"
+        >
             <legned>
             <h1>회원정보 수정</h1>
             </legned>
@@ -48,28 +50,21 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>비밀번호 변경</td>
+                        <td>현재 비밀번호</td>
                         <td>
-                            <table>
-                                <tr>
-                                    <td>현재 비밀번호</td>
-                                    <td>
-                                        <input type="password" name="pw">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>새 비밀번호</td>
-                                    <td>
-                                        <input type="password" name="rePw1">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>비밀번호 다시 입력</td>
-                                    <td>
-                                        <input type="password" name="rePw2">
-                                    </td>
-                                </tr>
-                            </table>
+                            <input type="password" name="pw">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>새 비밀번호</td>
+                        <td>
+                            <input type="password" name="rePw1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>비밀번호 다시 입력</td>
+                        <td>
+                            <input type="password" name="rePw2">
                         </td>
                     </tr>
                     <tr>

@@ -88,17 +88,33 @@ public class GuestServiceImpl implements GuestService {
         System.out.println("SERVICE : editAction");
         
         // 수정 항목 받아와서 적용
-        vo = new UserVO();
-        vo.setPw(req.getParameter("rePw1")); 
-        vo.setAlertChk((req.getParameter("alert") == "true") ? true : false); 
-        vo.setTel(req.getParameter("reTel")); 
-        vo.setPw(req.getParameter("rePw1")); 
+        UserVO updateVO = (UserVO) req.getSession().getAttribute("vo");
+        updateVO.setPw(req.getParameter("rePw1")); 
+        updateVO.setAlertChk((req.getParameter("alert") == "true") ? true : false); 
+        updateVO.setTel(req.getParameter("reTel")); 
+        updateVO.setPw(req.getParameter("rePw1")); 
         
         // 업데이트 요청
-        int isUpdated = dao.updateGuest(vo);
+        int isUpdated = dao.updateGuest(updateVO);
         
         // 업데이트 결과
         req.setAttribute("isUpdated", isUpdated);
     }
+
+    @Override
+    public void editComplete(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("SERVICE : editComplete");
+        
+        // 수정된 사용자 정보 획득
+        vo = (UserVO) req.getSession().getAttribute("vo");
+        String email = vo.getEmail();
+        
+        // 업데이트 요청
+        vo = dao.getGuestInfo(email);
+        
+        // 업데이트 결과
+        req.getSession().setAttribute("vo", vo);
+    }
+    
     
 }

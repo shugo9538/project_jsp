@@ -256,7 +256,7 @@ public enum DAOImpl implements DAO {
 
         try {
             conn = dataSource.getConnection();
-            String query = "UPDATE INTO USERVO SET pw=?, tel=?, alert=? WHERE id=?";
+            String query = "UPDATE USERVO SET pw=?, tel=?, alert=? WHERE id=?";
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getPw());
             pstmt.setString(2, vo.getTel());

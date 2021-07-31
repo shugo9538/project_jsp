@@ -19,4 +19,7 @@ public interface GuestService {
     
     // 회원정보 인증 및 상세페이지
     public void editAction(HttpServletRequest req, HttpServletResponse res);
+    
+    // 회원정보 수정 완료
+    public void editComplete(HttpServletRequest req, HttpServletResponse res);
 }

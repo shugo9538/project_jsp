@@ -98,6 +98,19 @@ public class GuestController extends HttpServlet {
             
             viewPage = "/guest/account/editInfo.jsp";
             
+        // 회원정보 수정 처리
+        } else if (url.equals("/editInfoAction.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.editAction(req, res);
+            
+            viewPage = "/guest/account/editInfoAction.jsp";
+            
+        } else if (url.equals("/editInfoComplete.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.editComplete(req, res);
+            
+            viewPage = "/guest/account/editInfo.jsp";
+            
         } 
         
         // url에 따라 설정된(viewPage)로 이동
