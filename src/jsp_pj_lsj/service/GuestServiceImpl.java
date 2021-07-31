@@ -76,7 +76,6 @@ public class GuestServiceImpl implements GuestService {
 
     @Override
     public void modifyAction(HttpServletRequest req, HttpServletResponse res) {
-        // TODO Auto-generated method stub
         
     }
     

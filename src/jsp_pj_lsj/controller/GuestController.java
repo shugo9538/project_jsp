@@ -16,21 +16,20 @@ public class GuestController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final static String INDEX_PAGE_URL = "/index.jsp";
 	private GuestServiceImpl service = new GuestServiceImpl();
-	
-    public GuestController() {
-        super();
-    }
 
+    // action 실행
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) 
 	        throws ServletException, IOException {
 	    action(req, res);
 	}
 
+	// 시작
     protected void doPost(HttpServletRequest req, HttpServletResponse res) 
             throws ServletException, IOException {
 		doGet(req, res);
 	}
 
+    // url 파싱 및 페이지 이동
     private void action(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
@@ -41,51 +40,59 @@ public class GuestController extends HttpServlet {
         String contextPath = req.getContextPath();
         String url = uri.substring(contextPath.length());
         
-        // 2단계. 요청 분석
+        // 인덱스 페이지로 이동
         if (url.equals("/index.gu")) {
             System.out.println("[url ==> ]" + url);
             
             viewPage = INDEX_PAGE_URL;
             
+        // 회원가입 페이지 이동
         } else if (url.equals("/signIn.gu")) {
             System.out.println("[url ==> ]" + url);
             
             viewPage = "/guest/account/signIn.jsp";
             
+        // 회원가입 처리
         } else if (url.equals("/signInAction.gu")) {
             System.out.println("[url ==> ]" + url);
             service.signInAction(req, res);
             
             viewPage = "/guest/account/signInAction.jsp";
         
+        // 회원가입 완료 후 이동
         } else if (url.equals("/signInComplete.gu")) {
             System.out.println("[url ==> ]" + url);
             
             viewPage = INDEX_PAGE_URL;
             
+        // 로그인 페이지로 이동
         } else if (url.equals("/login.gu")) {
             System.out.println("[url ==> ]" + url);
             
             viewPage = "/guest/account/login.jsp";
             
+        // 로그인 처리
         } else if (url.equals("/loginAction.gu")) {
             System.out.println("[url ==> ]" + url);
             service.loginAction(req, res);
             
             viewPage = "/guest/account/loginAction.jsp";
             
+        // 로그인 완료 후 세션 적용과 이동
         } else if (url.equals("/loginComplete.gu")) {
             System.out.println("[url ==> ]" + url);
             service.loginComplete(req, res);
             
             viewPage = INDEX_PAGE_URL;
             
+        // 로그아웃
         } else if (url.equals("/logout.gu")) {
             System.out.println("[url ==> ]" + url);
             req.getSession().invalidate();
             
             viewPage = INDEX_PAGE_URL;
             
+        // 회원정보 수정
         } else if (url.equals("/editInfo.gu")) {
             System.out.println("[url ==> ]" + url);
             
@@ -93,6 +100,7 @@ public class GuestController extends HttpServlet {
             
         } 
         
+        // url에 따라 설정된(viewPage)로 이동
         RequestDispatcher dispatcher = req.getRequestDispatcher(viewPage);
         dispatcher.forward(req, res);
     }
