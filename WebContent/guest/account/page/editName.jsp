@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="guest/account/js/scripts.js"></script>
+<%@ include file="/common/jsp/page/settings.jsp"%>
 </head>
 <body>
     <form action="" name="editNameForm" method="post">

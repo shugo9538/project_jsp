@@ -4,11 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Goupang</title>
-<link rel="stylesheet" href="guest/account/css/style.css">
-<script src="https://kit.fontawesome.com/a9dbc227eb.js" crossorigin="anonymous"></script>
-<script src="guest/account/js/scripts.js"></script>
+<%@ include file="/common/jsp/page/settings.jsp"%>
 </head>
 <body>
     <div class="account">

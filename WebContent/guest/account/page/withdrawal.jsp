@@ -5,15 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="${path}css/default.css">
-<link rel="stylesheet" href="${path}css/nav.css">
-<link rel="stylesheet" href="${path}css/header.css">
-<link rel="stylesheet" href="${path}css/section.css">
-<link rel="stylesheet" href="${path}css/footer.css">
-<script src="https://kit.fontawesome.com/a9dbc227eb.js" crossorigin="anonymous"></script>
-<script src="guest/account/js/scripts.js"></script>
-<link rel="stylesheet" href="guest/account/css/style.css">
-<link rel="stylesheet" href="guest/css/productList.css">
+<%@ include file="/common/jsp/page/settings.jsp"%>
 </head>
 <body>
     <%@ include file="/common/jsp/header.jsp"%>
