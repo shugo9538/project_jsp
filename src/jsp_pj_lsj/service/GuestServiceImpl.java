@@ -11,12 +11,7 @@ public class GuestServiceImpl implements GuestService {
     private DAOImpl dao = DAOImpl.INSTANCE;
     private UserVO vo = null;
     
-    @Override
-    public void confirmId(HttpServletRequest req, HttpServletResponse res) {
-        // TODO Auto-generated method stub
-        
-    }
-
+    // 회원가입 처리
     @Override
     public void signInAction(HttpServletRequest req, HttpServletResponse res) {
         System.out.println("SERVICE : signInAction");
@@ -35,6 +30,7 @@ public class GuestServiceImpl implements GuestService {
         req.setAttribute("isInsert", isInsert);
     }
 
+    // 로그인 처리
     @Override
     public void loginAction(HttpServletRequest req, HttpServletResponse res) {
         System.out.println("SERVICE : loginAction");
@@ -47,6 +43,7 @@ public class GuestServiceImpl implements GuestService {
         req.setAttribute("id", id);
     }
     
+    // 로그인 처리 완료
     @Override
     public void loginComplete(HttpServletRequest req, HttpServletResponse res) {
         System.out.println("SERVICE : loginComplete");
@@ -58,6 +55,7 @@ public class GuestServiceImpl implements GuestService {
         req.getSession().setAttribute("vo", vo);
     }
 
+    // 회원 삭제
     @Override
     public void deleteAction(HttpServletRequest req, HttpServletResponse res) {
         System.out.println("SERVICE : deleteAction");
@@ -69,14 +67,19 @@ public class GuestServiceImpl implements GuestService {
         req.setAttribute("isDeleted", isDeleted);
     }
 
+    // 회원정보 수정
     @Override
-    public void modifyDetailAction(HttpServletRequest req, HttpServletResponse res) {
+    public void editAction(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("SERVICE : deleteAction");
         
-    }
-
-    @Override
-    public void modifyAction(HttpServletRequest req, HttpServletResponse res) {
+        vo = new UserVO();
+        vo.setPw(req.getParameter("rePw1")); 
+        vo.setAlertChk((req.getParameter("alert") == "true") ? true : false); 
+        vo.setTel(req.getParameter("reTel")); 
+        vo.setPw(req.getParameter("rePw1")); 
+        int isUpdated = dao.updateGuest(vo);
         
+        req.setAttribute("isUpdated", isUpdated);
     }
     
 }

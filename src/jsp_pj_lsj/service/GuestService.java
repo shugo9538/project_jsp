@@ -4,8 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public interface GuestService {
-    // 중복확인 처리
-    public void confirmId(HttpServletRequest req, HttpServletResponse res);
 
     // 회원가입 처리
     public void signInAction(HttpServletRequest req, HttpServletResponse res);
@@ -20,8 +18,5 @@ public interface GuestService {
     public void deleteAction(HttpServletRequest req, HttpServletResponse res);
     
     // 회원정보 인증 및 상세페이지
-    public void modifyDetailAction(HttpServletRequest req, HttpServletResponse res);
-    
-    // 회원정보 수정 처리
-    public void modifyAction(HttpServletRequest req, HttpServletResponse res);
+    public void editAction(HttpServletRequest req, HttpServletResponse res);
 }
