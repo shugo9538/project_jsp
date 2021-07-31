@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Goupang</title>
-<%@ include file="/common/jsp/page/settings.jsp"%>
+<%@ include file="/guest/account/page/styleSettings.jsp"%>
 </head>
 <body>
     <div class="account">
