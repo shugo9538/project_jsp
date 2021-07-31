@@ -111,6 +111,22 @@ public class GuestController extends HttpServlet {
             
             viewPage = "/guest/account/editInfo.jsp";
             
+        } else if (url.equals("/withdrawal.gu")) {
+            System.out.println("[url ==> ]" + url);
+            
+            viewPage = "/guest/account/withdrawal.jsp";
+            
+        } else if (url.equals("/withdrawalSurvey.gu")) {
+            System.out.println("[url ==> ]" + url);
+            
+            viewPage = "/guest/account/withdrawalSurvey.jsp";
+            
+        } else if (url.equals("/withdrawalAction.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.deleteAction(req, res);
+            
+            viewPage = INDEX_PAGE_URL;
+            
         } 
         
         // url에 따라 설정된(viewPage)로 이동

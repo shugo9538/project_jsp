@@ -15,7 +15,7 @@
 <script src="guest/account/js/scripts.js"></script>
 <link rel="stylesheet" href="guest/account/css/style.css">
 </head>
-<body>
+<body onload="checkAlert();">
     <%@ include file="/common/jsp/header.jsp"%>
     <%@ include file="/common/jsp/nav.jsp"%>
     <section class="edit_info">
@@ -70,10 +70,9 @@
                     <tr>
                         <td>수신설정</td>
                         <td>
-                            <input type="checkbox" name="alert" value="${sessionScope.vo.isAlertChk()}"
-                                onclick="changeVal(this)"
-                            >
+                            <input type="checkbox" id="checkAlert" name="checkAlert" value="0" onclick="changeVal(this)">
                             광고 수신 동의
+                            <div id="aaa"></div>
                         </td>
                     </tr>
                     <tr>
@@ -82,12 +81,12 @@
                             <button id="btn" type="button" onclick="window.history.back();">나가기</button>
                         </td>
                     </tr>
-                </table>
+                </table
             </fieldset>
         </form>
         <div>
             탈퇴를 원하시면 우측의 회원탈퇴 버튼을 눌러주세요.
-            <button type="button" onclick="withdrawal.gu">회원탈퇴</button>
+            <button type="button" onclick="window.location='withdrawal.gu'">회원탈퇴</button>
         </div>
     </section>
     <%@ include file="/common/jsp/footer.jsp"%>

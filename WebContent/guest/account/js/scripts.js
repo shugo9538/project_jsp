@@ -38,12 +38,19 @@ function editName() {
     var url = "editName.do?id=" + name;
     window.open(url, "confirm", "menu=no, width=500, height=400");
 }
+function checkAlert() {
+    var checkBox = document.getElementById("checkAlert");
+    if (checkBox.value == true) checkBox.checked;
+}
 
 function changeVal(check) {
     if (check.checked == true) {
-        check.value=true;
+        document.getElementById("checkAlert").value="1";
+        document.getElementById("aaa").innerHTML= document.getElementById("checkAlert").value;
+        
     } else {
-        check.value=false;
+        document.getElementById("checkAlert").value="0";
+        document.getElementById("aaa").innerHTML= document.getElementById("checkAlert").value;
     }
 }
 
@@ -80,4 +87,13 @@ function editTelCheck() {
         telChecker.value = "1";
 
     }
+}
+
+function formChk() {
+    if () {
+        
+        return false;
+    }
+    
+    window.location='withdrawalSurbey.gu'
 }

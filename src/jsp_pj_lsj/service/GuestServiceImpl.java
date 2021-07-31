@@ -77,6 +77,7 @@ public class GuestServiceImpl implements GuestService {
         
         // 삭제요청
         int isDeleted = dao.deleteGuest(vo.getEmail());
+        if (isDeleted == 1) req.getSession().invalidate();
         
         // 삭제 결과
         req.setAttribute("isDeleted", isDeleted);
@@ -90,9 +91,12 @@ public class GuestServiceImpl implements GuestService {
         // 수정 항목 받아와서 적용
         UserVO updateVO = (UserVO) req.getSession().getAttribute("vo");
         updateVO.setPw(req.getParameter("rePw1")); 
-        updateVO.setAlertChk((req.getParameter("alert") == "true") ? true : false); 
+        boolean b = (req.getParameter("checkAlert") == "1") ? true : false;
+        updateVO.setAlertChk(b); 
         updateVO.setTel(req.getParameter("reTel")); 
         updateVO.setPw(req.getParameter("rePw1")); 
+        
+        System.out.println("alert : " + updateVO.isAlertChk());
         
         // 업데이트 요청
         int isUpdated = dao.updateGuest(updateVO);

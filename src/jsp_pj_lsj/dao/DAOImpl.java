@@ -260,7 +260,9 @@ public enum DAOImpl implements DAO {
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getPw());
             pstmt.setString(2, vo.getTel());
-            pstmt.setInt(3, (vo.isAlertChk())? 1 : 0); // true : 1, false : 0
+            int i = (vo.isAlertChk()) ? 1 : 0;
+            System.out.println("i : " + i);
+            pstmt.setInt(3, i); // true : 1, false : 0
             pstmt.setString(4, vo.getEmail());
 
             isUpdated = pstmt.executeUpdate();
