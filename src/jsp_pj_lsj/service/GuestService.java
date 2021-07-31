@@ -17,11 +17,11 @@ public interface GuestService {
     public void loginComplete(HttpServletRequest req, HttpServletResponse res);
     
     // 회원정보 인증 및 탈퇴처리
-    public void deleteGuestAction(HttpServletRequest req, HttpServletResponse res);
+    public void deleteAction(HttpServletRequest req, HttpServletResponse res);
     
     // 회원정보 인증 및 상세페이지
     public void modifyDetailAction(HttpServletRequest req, HttpServletResponse res);
     
     // 회원정보 수정 처리
-    public void modifyGuestAction(HttpServletRequest req, HttpServletResponse res);
+    public void modifyAction(HttpServletRequest req, HttpServletResponse res);
 }

@@ -59,19 +59,23 @@ public class GuestServiceImpl implements GuestService {
     }
 
     @Override
-    public void deleteGuestAction(HttpServletRequest req, HttpServletResponse res) {
-        // TODO Auto-generated method stub
+    public void deleteAction(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("SERVICE : deleteAction");
         
+        vo = new UserVO();
+        vo = (UserVO) req.getSession().getAttribute("vo");
+        int isDeleted = dao.deleteGuest(vo.getEmail());
+        
+        req.setAttribute("isDeleted", isDeleted);
     }
 
     @Override
     public void modifyDetailAction(HttpServletRequest req, HttpServletResponse res) {
-        // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void modifyGuestAction(HttpServletRequest req, HttpServletResponse res) {
+    public void modifyAction(HttpServletRequest req, HttpServletResponse res) {
         // TODO Auto-generated method stub
         
     }
