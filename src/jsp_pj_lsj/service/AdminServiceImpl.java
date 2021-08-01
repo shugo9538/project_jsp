@@ -64,7 +64,31 @@ public class AdminServiceImpl implements AdminService {
         int isInsert = dao.categoryAdd(id);
         
         // 결과 반환
-        req.setAttribute("isInsert", isInsert);
+        req.setAttribute("isError", isInsert);
     }
+
+    @Override
+    public void categoryDelete(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("SERVICE : categoryAdd");
+        
+        // 카테고리 데이터 삭제
+        String id = req.getParameter("categoryId");
+        int isDelete = (dao.categoryDelete(id) == 1) ? 1 : -1;
+       
+        // 결과 반환
+        req.setAttribute("isError", isDelete);
+    }
+
+    @Override
+    public void stockList(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("SERVICE : stockList");
+        
+        // 재고 목록 데이터
+        ArrayList<CategoryVO> list = (ArrayList<CategoryVO>) dao.categoryList();
+       
+        // 결과 반환
+        req.setAttribute("isError", 1);        
+    }
+    
     
 }

@@ -35,4 +35,7 @@ public interface DAO {
     
     // 카테고리 리스트 추가
     public int categoryAdd(String name);
+    
+    // 카테고리 리스트 추가
+    public int categoryDelete(String id);
 }

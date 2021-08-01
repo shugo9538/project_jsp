@@ -16,4 +16,10 @@ public interface AdminService {
     // 카테고리 추가
     public void categoryAdd(HttpServletRequest req, HttpServletResponse res);
     
+    // 카테고리 삭제
+    public void categoryDelete(HttpServletRequest req, HttpServletResponse res);
+    
+    // 재고목록
+    public void stockList(HttpServletRequest req, HttpServletResponse res);
+    
 }

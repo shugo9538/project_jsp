@@ -72,12 +72,51 @@ public class AdminController extends HttpServlet {
             System.out.println("[url ==> ]" + url);
             service.categoryList(req, res);
             
-            req.setAttribute("isInsert", 1);
+            req.setAttribute("isOk", 1);
             
             viewPage = "/admin/category/categoryList.jsp";
             
         // 카테고리 추가
         } else if (url.equals("/categoryAddAction.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.categoryAdd(req, res);
+            service.categoryList(req, res);
+            
+            viewPage = "/admin/category/categoryList.jsp";
+            
+        // 카테고리 삭제
+        } else if (url.equals("/categoryDeleteAction.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.categoryDelete(req, res);
+            service.categoryList(req, res);
+            
+            viewPage = "/admin/category/categoryList.jsp";
+            
+        // 재고관리 페이지
+        } else if (url.equals("/stockList.adm")) {
+            System.out.println("[url ==> ]" + url);
+            
+            
+            viewPage = "/admin/stock/stockList.jsp";
+            
+        // 환불관리 페이지
+        } else if (url.equals("/refundList.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.categoryAdd(req, res);
+            service.categoryList(req, res);
+            
+            viewPage = "/admin/category/categoryList.jsp";
+         
+        // 리뷰관리 페이지
+        } else if (url.equals("/reviewList.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.categoryAdd(req, res);
+            service.categoryList(req, res);
+            
+            viewPage = "/admin/category/categoryList.jsp";
+            
+        // 결산 확인 페이지
+        } else if (url.equals("/settlement.adm")) {
             System.out.println("[url ==> ]" + url);
             service.categoryAdd(req, res);
             service.categoryList(req, res);

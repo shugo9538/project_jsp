@@ -469,6 +469,44 @@ public enum DAOImpl implements DAO {
 
         return isInsert;
     }
+
+    /** 카테고리 삭제
+     * @param : 카테고리 아이디
+     * 
+     * @return
+     * 성공 : 1
+     * 실패 : 0
+     * */
+    @Override
+    public int categoryDelete(String id) {
+        System.out.println("DAO : DELETE CATEGORY");
+        int isDelete = 0;
+
+        try {
+            conn = dataSource.getConnection();
+            String query = "DELETE FROM CATEGORY WHERE category_id = ?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, id);
+
+            isDelete = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isDelete;
+    }
+    
     
     
 }
