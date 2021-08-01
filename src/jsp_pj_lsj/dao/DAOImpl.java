@@ -335,6 +335,59 @@ public enum DAOImpl implements DAO {
         return isUser;
     }
 
+    /* 설문결과 저장하기
+     * @param : 이유
+     * 
+     * @return
+     * 성공 : 1
+     * 실패 : 0
+     * */
+    @Override
+    public void surveyResult(String reason) {
+        System.out.println("DAO : UPDATE SURVEY");
+
+        try {
+            conn = dataSource.getConnection();
+            String query = "SELECT survey_cnt FROM WITHDRAWAL_SURVEY WHERE reason LIKE=?";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, reason);
+            rs = pstmt.executeQuery();
+            
+            // 설문 결과 가져오기
+            int cnt = 0;
+            if (rs.next()) {
+                cnt = rs.getInt("survey_cnt");
+            }
+            
+            pstmt.close();
+            conn.close();
+            
+            // 결과값에 이번에 선택된 값을 추가
+            conn = dataSource.getConnection();
+            String query2 = "UPDATE WITHDRAWAL_SURVEY SET survey_cnt=? WHERE reason LIKE=?";
+            pstmt = conn.prepareStatement(query2);
+            pstmt.setInt(1, cnt + 1);
+            pstmt.setString(2, reason);
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
     /* 카테고리 리스트 읽어오기
      * 
      * @return 모든 카테고리 리스트

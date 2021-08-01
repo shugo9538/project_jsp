@@ -77,7 +77,10 @@ public class GuestServiceImpl implements GuestService {
         
         // 삭제요청
         int isDeleted = dao.deleteGuest(vo.getEmail());
-        if (isDeleted == 1) req.getSession().invalidate();
+        if (isDeleted == 1) {
+            req.getSession().invalidate();
+            dao.surveyResult(req.getParameter("reason").toString());
+        }
         
         // 삭제 결과
         req.setAttribute("isDeleted", isDeleted);

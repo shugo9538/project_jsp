@@ -26,7 +26,7 @@
                     <li>완료</li>
                 </ul>
             </div>
-            <form action="withdrawalAction.gu" method="post" onsubmit="formChk()">
+            <form action="withdrawalAction.gu" method="post" name="withdrawalForm" onsubmit="return formChk();">
                 <fieldset>
                     <table>
                         <tr>
@@ -58,7 +58,7 @@
                         </tr>
                         <tr>
                             <td colspan="8">
-                                <input type="checkbox" name="chk" value="상기 구팡 회원탈퇴 시 처리 사항 안내를 확인하였음에 동의합니다.">
+                                <input type="checkbox" name="chk">
                                 상기 구팡 회원탈퇴 시 처리 사항 안내를 확인하였음에 동의합니다.
                             </td>
                         </tr>
@@ -68,11 +68,11 @@
                         <tr>
                             <td>이름 :</td>
                             <td>
-                                <input type="text" value="${vo.getName()}" disabled>
+                                <input type="text" value="${vo.getName()}" readonly>
                             </td>
                             <td>이메일 :</td>
                             <td>
-                                <input type="email" value="${vo.getEmail()}" disabled>
+                                <input type="email" value="${vo.getEmail()}" readonly>
                             </td>
                             <td>비밀번호 :</td>
                             <td>

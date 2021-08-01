@@ -216,6 +216,25 @@ ol li:first-child {
     margin-left: 0;
 }
 
+.withdrawalSForm {
+    font-size: 18px;
+    text-align: left;
+}
+
+.withdrawalSForm table td{
+    border: 0px;
+}
+
+.withdrawalSForm legend {
+    font-size: 22px;
+    font-style: bold;
+    text-align: center;
+}
+
+#submit {
+    text-align: center;
+}
+
 @media screen and (max-width: 768px) {
     i[class^="fa"] {
         font-size: 1em;

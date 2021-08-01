@@ -98,11 +98,11 @@ function setName() {
     self.close();
 }
 
-//function formChk() {
-//    if () {
-//        
-//        return false;
-//    }
-//    
-//    window.location='withdrawalSurbey.gu'
-//}
+function formChk() {
+    if (!document.withdrawalForm.chk.checked) {
+        alert("동의해야 다음을 진행하실 수 있습니다.");
+        document.withdrawalForm.chk.focus();
+        
+        return false;
+    }
+}
