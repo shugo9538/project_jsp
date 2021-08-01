@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- footer -->
-    <footer>
+    <footer class="footer">
         <hr>
         <div class="company_info">
             <div>
@@ -20,6 +20,7 @@
                 <br>
                 통신판매업신고 : 2017-서울송파-0680
             </div>
+            <hr id="vertical">
             <div>
                 365고객센터 | 전자금융거래분쟁처리담당
                 <br>

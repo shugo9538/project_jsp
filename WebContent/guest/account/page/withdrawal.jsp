@@ -26,7 +26,7 @@
                     <li>완료</li>
                 </ul>
             </div>
-            <form action="withdrawalAction.gu" method="post" name="withdrawalForm" onsubmit="return formChk();">
+            <form action="withdrawalAction.gu" method="post" name="withdrawalForm" class="withdrawalForm" onsubmit="return formChk();">
                 <fieldset>
                     <table>
                         <tr>
@@ -37,6 +37,7 @@
                                     <li>이용 불편 및 각종 문의 사항은 고객센터로 문의 주시면 성심 성의껏 답변 드리겠습니다.</li>
                                     <li>자주 묻는 질문 / 1:1 온라인 문의 / 전화 문의: 1577-7011 (365일 오전 9시~오후6시)</li>
                                 </ol>
+                                <hr>
                             </td>
                         </tr>
                         <tr>
@@ -54,16 +55,18 @@
                                     <li>상품문의 및 후기, 댓글 삭제를 원하시는 경우에는 먼저 해당 게시물을 삭제하신 후 탈퇴를 신청하시기 바랍니다.</li>
                                     <li>이미 결제가 완료된 건은 탈퇴로 취소되지 않습니다.</li>
                                 </ol>
+                                <hr>
                             </td>
                         </tr>
                         <tr>
                             <td colspan="8">
                                 <input type="checkbox" name="chk">
                                 상기 구팡 회원탈퇴 시 처리 사항 안내를 확인하였음에 동의합니다.
+                                <hr>
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="8">보안을 위해 회원님의 이름과 계정 이메일 및 비밀번호를 확인 합니다.</td>
+                            <td colspan="8">보안을 위해 회원님의 이름과 계정 이메일 및 비밀번호를 확인 합니다.<hr></td>
                         </tr>
                         <tr>
                             <td>이름 :</td>

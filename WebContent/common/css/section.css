@@ -8,6 +8,8 @@ section {
   width: 100%;
   position: relative;
   min-height: 100%;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
 }
 
 article {
@@ -52,6 +54,12 @@ article {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+}
+
+#vertical {
+    width: 0.1px;
+    min-height: 60px;
+    background: gray;
 }
 
 /* 카테고리 스타일 */
@@ -137,12 +145,10 @@ article {
 .content_width {
   width: 1000px;
   text-align: -webkit-center;
+  min-height: 100%;
+  padding-bottom: 50px;
 }
 
-/* .content_width {
-  width: 70%;
-  text-align: -webkit-center;
-} */
 .small_play_list {
   display: flex;
   list-style-type: none;

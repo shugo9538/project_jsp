@@ -5,10 +5,6 @@ form {
     text-align: center;
 }
 
-i[class^="fa"] {
-    font-size: 21px;
-}
-
 .account {
     display: flex;
     flex-direction: column;
@@ -103,10 +99,6 @@ i[class^="fa"] {
 form {
     display: table-cell;
     text-align: center;
-}
-
-i[class^="fa"] {
-    font-size: 21px;
 }
 
 .editForm {
@@ -214,6 +206,16 @@ ol li:first-child {
     list-style-type: none;
     padding-left: 0px;
     margin-left: 0;
+    margin-bottom: 5px;
+}
+
+.withdrawalForm td, .withdrawalForm input {
+    border: 0;
+}
+
+.withdrawalForm input[type="submit"] {
+    border: 1px solid gray;
+/*     font-size: 1px; */
 }
 
 .withdrawalSForm {

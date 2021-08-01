@@ -3,17 +3,13 @@ nav {
   align-items: center;
   justify-content: space-between;
   width: 1000px;
-  font-size: 1.2em;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
 /* category_drop down */
 .nav_category {
   height: 45px;
-}
-
-.nav_category ul {
-
 }
 
 .nav_category ul>li {
@@ -31,7 +27,7 @@ nav {
 
 .nav_category li i {
   display: flex;
-  font-size: 2em;
+  font-size: 40px;
   border-radius: 0.5em;
   plcae-content: center;
 }
@@ -96,7 +92,7 @@ nav {
 
 /* 서비스 아이콘 속성 */
 .nav_service {
-  font-size: 2em;
+  font-size: 30px;
 }
 
 @media screen and (max-width: 768px) {

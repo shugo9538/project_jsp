@@ -4,6 +4,8 @@
 html {
   height: auto;
   margin: 0;
+  position: relative;
+  min-height: 100%;
 }
 
 fieldset {
@@ -15,10 +17,9 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 0;
-  padding: 0;
   width: 100%;
-  min-height: calc(100vh - 100px);
-  margin-bottom: -100px;
+  min-height: 100%;
+/*   margin-bottom: -100px; */
 }
 
 a {
