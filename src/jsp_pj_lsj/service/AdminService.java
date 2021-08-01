@@ -12,4 +12,8 @@ public interface AdminService {
     
     // 카테고리 가져오기
     public void categoryList(HttpServletRequest req, HttpServletResponse res);
+
+    // 카테고리 추가
+    public void categoryAdd(HttpServletRequest req, HttpServletResponse res);
+    
 }

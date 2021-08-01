@@ -56,6 +56,8 @@ public class AdminController extends HttpServlet {
             service.loginComplete(req, res);
             service.categoryList(req, res);
             
+            req.setAttribute("isInsert", 1);
+            
             viewPage = "/admin/category/categoryList.jsp";
          
         // 로그아웃
@@ -65,9 +67,20 @@ public class AdminController extends HttpServlet {
             
             viewPage = "/admin.jsp";
             
-        // 카테고리 추가
-        } else if (url.equals("/categoryAdd.adm")) {
+        // 카테고리 목록
+        } else if (url.equals("/categoryList.adm")) {
             System.out.println("[url ==> ]" + url);
+            service.categoryList(req, res);
+            
+            req.setAttribute("isInsert", 1);
+            
+            viewPage = "/admin/category/categoryList.jsp";
+            
+        // 카테고리 추가
+        } else if (url.equals("/categoryAddAction.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.categoryAdd(req, res);
+            service.categoryList(req, res);
             
             viewPage = "/admin/category/categoryList.jsp";
         } 

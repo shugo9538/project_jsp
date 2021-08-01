@@ -54,5 +54,17 @@ public class AdminServiceImpl implements AdminService {
         // 결과 반환
         req.setAttribute("categoryVO", list);
     }
+
+    @Override
+    public void categoryAdd(HttpServletRequest req, HttpServletResponse res) {
+        System.out.println("SERVICE : categoryAdd");
+        
+        // 카테고리 데이터 추가
+        String id = req.getParameter("category_name");
+        int isInsert = dao.categoryAdd(id);
+        
+        // 결과 반환
+        req.setAttribute("isInsert", isInsert);
+    }
     
 }

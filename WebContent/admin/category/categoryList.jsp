@@ -1,3 +1,5 @@
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="jsp_pj_lsj.vo.CategoryVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/jsp/settings.jsp"%>
 <!DOCTYPE html>
@@ -8,32 +10,40 @@
 <%@ include file="/admin/common/jsp/styleSettings.jsp"%>
 </head>
 <body>
+<%
+%>
     <%@ include file="/admin/common/jsp/header.jsp"%>
     <%@ include file="/admin/common/jsp/nav.jsp"%>
+    <c:if test="${isInsert != 1}">
+        <script type="text/javascript">
+        	alert("카테고리 추가 오류");
+        </script>
+    </c:if>
     <section>
-        <article class="">
+        <article>
             <div class="has_side">
                 <%@ include file="/admin/common/jsp/leftSideBar.jsp"%>
                 <div class="inquire">
+                    <%@ include file="/admin/category/categoryAdd.jsp" %>
                     <table>
                         <tr>
                             <th>번호</th>
                             <th>카테고리명</th>
                             <th>추가/수정/삭제</th>
                         </tr>
-                        <c:if test="${param.categoryVO eq not null}">
-                            <c:forEach items="${param.categoryVO}" var="vo">
+                        <c:if test="${categoryVO != null}">
+                            <c:forEach var="vo" items="${categoryVO}" begin="0" end="10" step="1" varStatus="status">
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="" value="${vo.getCategoryId}">
-                                        <label for="">${vo.getCategoryId}</label>
+                                        <input type="checkbox" name="" value="${status.count}">
+                                        <label for="">${status.count}</label>
                                     </td>
-                                    <td>${vo.getCategoryName}</td>
+                                    <td>${vo.getCategoryName()}</td>
                                     <td>
                                         <ul>
                                             <li>
-                                                <button type="button" name="button">수정</button>
-                                                <button type="button" name="button">삭제</button>
+                                                <input type="button" name="button" onclick="window.location=''" value="수정">
+                                                <input type="button" name="button" onclick="window.location=''" value="삭제">
                                             </li>
                                         </ul>
                                     </td>
@@ -41,14 +51,6 @@
                             </c:forEach>
                         </c:if>
                     </table>
-                    
-                    <div class="pager">
-                        <ul>
-                            <li>
-                                <input type="button" name="addBtn" onclick="window.location='categoryAdd.adm'" value="추가">
-                            </li>
-                        </ul>
-                    </div>
                 </div>
                 <%@ include file="/admin/common/jsp/rightSideBar.jsp"%>
             </div>

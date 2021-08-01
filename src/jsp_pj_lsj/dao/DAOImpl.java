@@ -32,7 +32,8 @@ public enum DAOImpl implements DAO {
         }
     }
 
-    /* 아이디 중복확인을 위한 데이터 접근
+    /* 사용자 데이터 접근 */
+    /** 아이디 중복확인을 위한 데이터 접근
      * @param : 입력ID
      * 
      * @return
@@ -74,7 +75,7 @@ public enum DAOImpl implements DAO {
         return isExists;
     }
 
-    /* 회원가입 데이터 접근
+    /** 회원가입 데이터 접근
      * @param : UserVO(유저정보)
      * 
      * @return
@@ -114,7 +115,7 @@ public enum DAOImpl implements DAO {
         return isInsert;
     }
 
-    /* 사용자확인 위한 데이터 접근
+    /** 사용자확인 위한 데이터 접근
      * @param : 아이디, 패스워드
      * 
      * @return
@@ -161,7 +162,7 @@ public enum DAOImpl implements DAO {
         return isUser;
     }
     
-    /* 사용자 정보 획득 : userCheck()후에만 동작할 것
+    /** 사용자 정보 획득 : userCheck()후에만 동작할 것
      * @param : 입력ID
      * 
      * @return
@@ -208,7 +209,7 @@ public enum DAOImpl implements DAO {
         return vo;
     }
 
-    /* 사용자 정보 삭제
+    /** 사용자 정보 삭제
      * @param : 입력ID
      * 
      * @return
@@ -245,7 +246,7 @@ public enum DAOImpl implements DAO {
         return isDeleted;
     }
 
-    /* 사용자 정보 수정
+    /** 사용자 정보 수정
      * @param : UserVO
      * 
      * @return
@@ -288,54 +289,7 @@ public enum DAOImpl implements DAO {
         return isUpdated;
     }
 
-    /* 관리자 로그인
-     * @param : 아이디, 패스워드
-     * 
-     * @return
-     * 성공 : 1
-     * 실패 : -1(비밀번호 오류), 0(쿼리오류:사용자 없음)
-     * */
-    @Override
-    public int adminCheck(String id, String pw) {
-        System.out.println("DAO : SELECT USER");
-        int isUser = 0;
-
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT * FROM USERVO WHERE id = ? AND isAdmin = 1";
-            pstmt = conn.prepareStatement(query);
-            pstmt.setString(1, id);
-
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                if (pw.equals(rs.getString("pw"))) {
-                    isUser = 1;
-                } else {
-                    isUser = -1;
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (rs != null)
-                    pstmt.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return isUser;
-    }
-
-    /* 설문결과 저장하기
+    /** 설문결과 저장하기
      * @param : 이유
      * 
      * @return
@@ -388,9 +342,56 @@ public enum DAOImpl implements DAO {
         }
 
     }
-
-    /* 카테고리 리스트 읽어오기
+    
+    /* 관리자 데이터 접근 */
+    /** 관리자 로그인
+     * @param : 아이디, 패스워드
      * 
+     * @return
+     * 성공 : 1
+     * 실패 : -1(비밀번호 오류), 0(쿼리오류:사용자 없음)
+     * */
+    @Override
+    public int adminCheck(String id, String pw) {
+        System.out.println("DAO : SELECT USER");
+        int isUser = 0;
+
+        try {
+            conn = dataSource.getConnection();
+            String query = "SELECT * FROM USERVO WHERE id = ? AND isAdmin = 1";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, id);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                if (pw.equals(rs.getString("pw"))) {
+                    isUser = 1;
+                } else {
+                    isUser = -1;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null)
+                    pstmt.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isUser;
+    }
+
+    /** 카테고리 리스트 읽어오기
      * @return 모든 카테고리 리스트
      * */
     @Override
@@ -407,6 +408,7 @@ public enum DAOImpl implements DAO {
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
+                vo = new CategoryVO();
                 vo.setCategoryId(rs.getInt("category_id")); 
                 vo.setCategoryName(rs.getString("category_name")); 
                 list.add(vo);
@@ -430,4 +432,43 @@ public enum DAOImpl implements DAO {
 
         return list;
     }
+
+    /** 카테고리 추가
+     * @param : 카테고리 이름추가
+     * 
+     * @return
+     * 성공 : 1
+     * 실패 : 0
+     * */
+    @Override
+    public int categoryAdd(String name) {
+        System.out.println("DAO : INSERT CATEGORY");
+        int isInsert = 0;
+
+        try {
+            conn = dataSource.getConnection();
+            String query = "INSERT INTO CATEGORY(category_id, category_name) VALUES(category_seq.nextval, ?)";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, name);
+
+            isInsert = pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isInsert;
+    }
+    
+    
 }

@@ -32,4 +32,7 @@ public interface DAO {
     
     // 카테고리 리스트 읽어오기
     public List<CategoryVO> categoryList();
+    
+    // 카테고리 리스트 추가
+    public int categoryAdd(String name);
 }

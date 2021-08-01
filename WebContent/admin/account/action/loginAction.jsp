@@ -22,7 +22,7 @@
         <c:otherwise>
             <script type="text/javascript">
                 setTimeout(() => {
-                    alert("존재하지 않는 아이디 입니다. 다시확인해주세요.");
+                    alert("관리자 아이디가 아닙니다. 다시확인해주세요.");
                     window.history.back();
                 }, 10);
             </script>

@@ -9,8 +9,10 @@
     <!-- header -->
     <header id="top">
         <div class="user_state">
-            ${sessionScope.vo.getName()}
-            <a href="logout.adm"> 로그아웃 </a>
+            <ul>
+                <b>${sessionScope.vo.getName()}</b>
+                <li onclick="window.location='logout.adm'">로그아웃</li>
+            </ul>
         </div>
     </header>
     <!-- header end -->
