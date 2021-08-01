@@ -12,7 +12,6 @@
         <c:when test="${isUpdated == 1}">
             <script type="text/javascript">
             	setTimeout(() => {
-            	    alert("성공적으로 수정했습니다.");
             	    opener.document.signInform.id.value = ${name};
                     self.close();
                 }, 10);

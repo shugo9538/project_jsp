@@ -26,7 +26,6 @@ i[class^="fa"] {
 
 .accountForm fieldset {
     margin: 0;
-    border: 0;
     padding: 0;
 }
 
@@ -64,7 +63,10 @@ i[class^="fa"] {
 }
 
 #btn {
-    border: 1px solid black;
+    width: 30%;
+    padding: 0px;
+    font-size: 18px;
+    border: 1px solid gray;
 }
 
 #telChecker {
@@ -193,15 +195,6 @@ i[class^="fa"] {
 
 .login_copyrihgt {
     font-size: 14px;
-}
-
-.signup {
-    width: 460px;
-    font-size: 21px;
-}
-
-#move_signup {
-    border: 1px solid gray;
 }
 
 ol {

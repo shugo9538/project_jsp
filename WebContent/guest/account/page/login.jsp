@@ -42,8 +42,6 @@
                                     <label for="auto_login">자동로그인</label>
                                 </div>
                                 <div class="finder">
-                                    <div onclick="">아이디</div>
-                                    /
                                     <div onclick="">비밀번호 찾기</div>
                                 </div>
                             </div>
@@ -56,9 +54,7 @@
                     </tr>
                     <tr>
                         <td colspan="2">
-                            <div class="signup">
-                                <input type="button" id="move_signup" onclick="window.location='signIn.gu'" value="회원가입">
-                            </div>
+                            <input type="button" id="btn" onclick="window.location='signIn.gu'" value="회원가입">
                         </td>
                     </tr>
                     <tr>

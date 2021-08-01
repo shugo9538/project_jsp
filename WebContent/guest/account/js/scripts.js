@@ -41,7 +41,7 @@ function editName() {
 
 function checkAlert() {
     var checkBox = document.getElementById("checkAlert");
-    if (checkBox.value == true) checkBox.checked;
+    if (checkBox.value == 1) checkBox.checked = true;
 }
 
 function changeVal(check) {
@@ -50,7 +50,7 @@ function changeVal(check) {
         document.getElementById("aaa").innerHTML= document.getElementById("checkAlert").value;
         
     } else {
-        document.getElementById("checkAlert").value="0";
+        document.getElementById("checkAlert").value="2";
         document.getElementById("aaa").innerHTML= document.getElementById("checkAlert").value;
     }
 }

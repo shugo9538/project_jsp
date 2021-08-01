@@ -68,7 +68,7 @@
                                 <td>
                                 <div class="checkBoxForm">
                                     <div>
-                                        <input type="checkbox" id="checkAlert" name="checkAlert" value="0" onclick="changeVal(this)">
+                                        <input type="checkbox" id="checkAlert" name="checkAlert" value="${(sessionScope.vo.isAlertChk()) ? 1 : 2}" onclick="changeVal(this)">
                                     </div>
                                     <div>광고 수신 동의</div>
                                 </div>
