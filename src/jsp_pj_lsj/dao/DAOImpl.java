@@ -348,9 +348,10 @@ public enum DAOImpl implements DAO {
 
         try {
             conn = dataSource.getConnection();
-            String query = "SELECT survey_cnt FROM WITHDRAWAL_SURVEY WHERE reason LIKE=?";
+            String query = "SELECT survey_cnt FROM WITHDRAWAL_SURVEY WHERE reason LIKE ?";
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, reason);
+            
             rs = pstmt.executeQuery();
             
             // 설문 결과 가져오기
@@ -364,7 +365,7 @@ public enum DAOImpl implements DAO {
             
             // 결과값에 이번에 선택된 값을 추가
             conn = dataSource.getConnection();
-            String query2 = "UPDATE WITHDRAWAL_SURVEY SET survey_cnt=? WHERE reason LIKE=?";
+            String query2 = "UPDATE WITHDRAWAL_SURVEY SET survey_cnt=? WHERE reason LIKE ?";
             pstmt = conn.prepareStatement(query2);
             pstmt.setInt(1, cnt + 1);
             pstmt.setString(2, reason);
