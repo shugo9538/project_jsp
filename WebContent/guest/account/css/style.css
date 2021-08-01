@@ -50,10 +50,9 @@ i[class^="fa"] {
 }
 
 .accountForm table input[type="checkbox"] {
-    width: auto; 
-    padding : 16px 0px 12px;
-    border: 0px;
+    width: auto;
     padding: 16px 0px 12px;
+    border: 0px;
 }
 
 .accountForm table input[type="submit"]:nth-last-child(2) {
@@ -125,6 +124,8 @@ i[class^="fa"] {
     border: 0;
     text-align: left;
     font-size: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .editForm td:first-child {
@@ -136,11 +137,19 @@ i[class^="fa"] {
 }
 
 .editForm table input {
-    width: auto;
+    width: 300px;
     height: 35px;
     font-size: 18px;
     text-align: center;
     border: 1px solid gray;
+}
+
+.editForm table input[type="button"] {
+    width: auto;
+}
+
+.editForm table input[type="submit"] {
+    width: auto;
 }
 
 .editForm table button {
@@ -180,6 +189,38 @@ i[class^="fa"] {
     font-size: 14px;
     margin: 0;
     align-self: center;
+}
+
+.login_copyrihgt {
+    font-size: 14px;
+}
+
+.signup {
+    width: 460px;
+    font-size: 21px;
+}
+
+#move_signup {
+    border: 1px solid gray;
+}
+
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ol li {
+    font-size: 13px;
+    text-align: left;
+    list-style-type: " - ";
+    margin-left: 20px;
+}
+
+ol li:first-child {
+    font-size: 16px;
+    list-style-type: none;
+    padding-left: 0px;
+    margin-left: 0;
 }
 
 @media screen and (max-width: 768px) {

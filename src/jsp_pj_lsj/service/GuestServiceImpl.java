@@ -99,8 +99,6 @@ public class GuestServiceImpl implements GuestService {
         updateVO.setAlertChk(b); 
         updateVO.setTel(req.getParameter("reTel")); 
         
-        System.out.println("alert : " + updateVO.isAlertChk());
-        
         // 업데이트 요청
         int isUpdated = dao.updateGuest(updateVO);
         

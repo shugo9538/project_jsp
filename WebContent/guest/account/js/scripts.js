@@ -92,16 +92,17 @@ function editTelCheck() {
 
 function setName() {
     var name = document.editNameForm.reName.value
+    alert(name);
     opener.document.editForm.name.value = name;
     opener.alert("성공적으로 수정했습니다.");
     self.close();
 }
 
-function formChk() {
-    if () {
-        
-        return false;
-    }
-    
-    window.location='withdrawalSurbey.gu'
-}
+//function formChk() {
+//    if () {
+//        
+//        return false;
+//    }
+//    
+//    window.location='withdrawalSurbey.gu'
+//}

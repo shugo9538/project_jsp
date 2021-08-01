@@ -54,13 +54,21 @@
                             <input type="submit" id="btn" value="로그인">
                         </td>
                     </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="signup">
+                                <input type="button" id="move_signup" onclick="window.location='signIn.gu'" value="회원가입">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="login_copyrihgt">@Goupang Corp. All rights reserved.</div>
+                        </td>
+                    </tr>
                 </table>
             </fieldset>
         </form>
-        <div class="signup">
-            <button type="button" id="move_signup" onclick="window.location='signIn.gu'">회원가입</button>
-        </div>
-        <div class="login_copyrihgt">@Goupang Corp. All rights reserved.</div>
     </div>
 </body>
 </html>

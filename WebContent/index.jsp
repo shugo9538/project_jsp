@@ -6,12 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Goupang</title>
-<link rel="stylesheet" href="${path}css/default.css">
-<link rel="stylesheet" href="${path}css/nav.css">
-<link rel="stylesheet" href="${path}css/header.css">
-<link rel="stylesheet" href="${path}css/section.css">
-<link rel="stylesheet" href="${path}css/footer.css">
-<script src="https://kit.fontawesome.com/a9dbc227eb.js" crossorigin="anonymous"></script>
+<%@ include file="common/jsp/styleSettings.jsp" %>
 </head>
 <body>
     <%@ include file="/common/jsp/header.jsp"%>

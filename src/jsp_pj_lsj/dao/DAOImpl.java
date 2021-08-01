@@ -4,12 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import jsp_pj_lsj.vo.CategoryVO;
 import jsp_pj_lsj.vo.UserVO;
 
 public enum DAOImpl implements DAO {
@@ -256,14 +259,15 @@ public enum DAOImpl implements DAO {
 
         try {
             conn = dataSource.getConnection();
-            String query = "UPDATE USERVO SET pw=?, tel=?, alert=? WHERE id=?";
+            String query = "UPDATE USERVO SET pw=?, name=?, tel=?, alert=? WHERE id=?";
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getPw());
-            pstmt.setString(2, vo.getTel());
+            pstmt.setString(2, vo.getName());
+            pstmt.setString(3, vo.getTel());
             int i = (vo.isAlertChk()) ? 1 : 0;
             System.out.println("i : " + i);
-            pstmt.setInt(3, i); // true : 1, false : 0
-            pstmt.setString(4, vo.getEmail());
+            pstmt.setInt(4, i); // true : 1, false : 0
+            pstmt.setString(5, vo.getEmail());
 
             isUpdated = pstmt.executeUpdate();
 
@@ -284,4 +288,92 @@ public enum DAOImpl implements DAO {
         return isUpdated;
     }
 
+    /* 관리자 로그인
+     * @param : 아이디, 패스워드
+     * 
+     * @return
+     * 성공 : 1
+     * 실패 : -1(비밀번호 오류), 0(쿼리오류:사용자 없음)
+     * */
+    @Override
+    public int adminCheck(String id, String pw) {
+        System.out.println("DAO : SELECT USER");
+        int isUser = 0;
+
+        try {
+            conn = dataSource.getConnection();
+            String query = "SELECT * FROM USERVO WHERE id = ? AND isAdmin = 1";
+            pstmt = conn.prepareStatement(query);
+            pstmt.setString(1, id);
+
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                if (pw.equals(rs.getString("pw"))) {
+                    isUser = 1;
+                } else {
+                    isUser = -1;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null)
+                    pstmt.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isUser;
+    }
+
+    /* 카테고리 리스트 읽어오기
+     * 
+     * @return 모든 카테고리 리스트
+     * */
+    @Override
+    public List<CategoryVO> categoryList() {
+        System.out.println("DAO : SELECT CATEGORY");
+        List<CategoryVO> list = new ArrayList<>();
+        CategoryVO vo = new CategoryVO();
+
+        try {
+            conn = dataSource.getConnection();
+            String query = "SELECT * FROM CATEGORY ORDER BY category_id";
+            pstmt = conn.prepareStatement(query);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                vo.setCategoryId(rs.getInt("category_id")); 
+                vo.setCategoryName(rs.getString("category_name")); 
+                list.add(vo);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null)
+                    pstmt.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
 }

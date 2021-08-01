@@ -82,6 +82,10 @@
                     <tr>
                         <td colspan="2">
                             <input type="submit" id="btn" value="회원가입">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
                             <input type="reset" id="btn" value="취소" onclick="window.history.back();">
                         </td>
                     </tr>

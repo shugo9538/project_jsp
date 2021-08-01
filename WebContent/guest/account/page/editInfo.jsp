@@ -19,6 +19,7 @@
                 >
                     <legned>
                     <h1>회원정보 수정</h1>
+                    <hr>
                     </legned>
                     <fieldset>
                         <table>
@@ -31,7 +32,7 @@
                             <tr>
                                 <td>이름</td>
                                 <td>
-                                    <input type="text" value="${sessionScope.vo.getName()}" name="name" disabled>
+                                    <input type="text" value="${sessionScope.vo.getName()}" name="name" readonly>
                                     <input type="button" name="reName" value="이름변경" onclick="editName()">
                                 </td>
                             </tr>
