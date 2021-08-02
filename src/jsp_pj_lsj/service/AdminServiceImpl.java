@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import jsp_pj_lsj.dao.DAOImpl;
 import jsp_pj_lsj.vo.CategoryVO;
+import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
 
 public class AdminServiceImpl implements AdminService {
@@ -84,10 +85,10 @@ public class AdminServiceImpl implements AdminService {
         System.out.println("SERVICE : stockList");
         
         // 재고 목록 데이터
-        ArrayList<CategoryVO> list = (ArrayList<CategoryVO>) dao.categoryList();
+        ArrayList<ProductVO> list = (ArrayList<ProductVO>) dao.productList();
        
         // 결과 반환
-        req.setAttribute("isError", 1);        
+        req.setAttribute("productVO", list);       
     }
     
     

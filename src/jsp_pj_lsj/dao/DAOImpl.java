@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import jsp_pj_lsj.vo.CategoryVO;
+import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
 
 public enum DAOImpl implements DAO {
@@ -505,6 +506,46 @@ public enum DAOImpl implements DAO {
         }
 
         return isDelete;
+    }
+
+    /** 상품 리스트 읽어오기
+     * @return 모든 상품 리스트
+     * */
+    @Override
+    public List<ProductVO> productList() {
+        System.out.println("DAO : SELECT PRODCUT");
+        List<ProductVO> list = new ArrayList<>();
+        ProductVO vo = new ProductVO();
+
+        try {
+            conn = dataSource.getConnection();
+            String query = "SELECT * FROM CATEGORY ORDER BY category_id";
+            pstmt = conn.prepareStatement(query);
+
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                vo = new ProductVO();
+                list.add(vo);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } finally {
+            try {
+                if (rs != null)
+                    pstmt.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
     }
     
     
