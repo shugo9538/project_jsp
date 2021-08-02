@@ -42,4 +42,5 @@ request.getParameter(), request.getAttribute() : 일회성 요청에 대한 데�
 session - 지속적으로 서버와 데이터를 공유하고 있는 자원 => 언제까지? context.xml에 Resource태그에 선언한 timeout시간동안 보유 혹은 invalidate()메서드와 같이 세션을 종료하는 메서드가 
 
 REFERENCE
+
 그림1. http://jun.hansung.ac.kr/SWP/PHP/PHP%20Sessions.html
