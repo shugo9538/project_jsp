@@ -17,6 +17,7 @@
             <div class="has_side">
                 <%@ include file="/admin/common/jsp/leftSideBar.jsp"%>
                 <div class="inquire">
+                    <%@ include file="/admin/stock/stockAdd.jsp"%>
                     <table>
                         <tr>
                             <th>번호</th>

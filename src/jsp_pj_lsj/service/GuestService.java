@@ -8,6 +8,9 @@ public interface GuestService {
     // 회원가입 처리
     public void signInAction(HttpServletRequest req, HttpServletResponse res);
     
+    // 회원가입 처리
+    public void emailChkAction(HttpServletRequest req, HttpServletResponse res);
+    
     // 로그인 처리
     public void loginAction(HttpServletRequest req, HttpServletResponse res);
     

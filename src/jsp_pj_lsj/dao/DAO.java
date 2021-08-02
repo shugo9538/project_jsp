@@ -13,6 +13,12 @@ public interface DAO {
     // 회원가입 처리
     public int insertGuest(UserVO vo);
     
+    // 메일 송신
+    public void sendmail(String email, String key);
+    
+    // 이메일 확인
+    public int emailChk(String key);
+    
     // 로그인 처리
     public int userCheck(String id, String pw);
     

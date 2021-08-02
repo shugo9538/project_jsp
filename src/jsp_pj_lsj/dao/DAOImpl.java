@@ -6,12 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import jsp_pj_lsj.util.Logger;
+import jsp_pj_lsj.util.SettingsValue;
 import jsp_pj_lsj.vo.CategoryVO;
 import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
@@ -54,8 +63,7 @@ public enum DAOImpl implements DAO {
 
             rs = pstmt.executeQuery();
 
-            if (!rs.next())
-                isExists = true;
+            if (!rs.next()) isExists = true;
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,12 +98,13 @@ public enum DAOImpl implements DAO {
 
         try {
             conn = dataSource.getConnection();
-            String query = "INSERT INTO USERVO(id, pw, name, tel) VALUES(?, ?, ?, ?)";
+            String query = "INSERT INTO USERVO(id, pw, name, tel, key) VALUES(?, ?, ?, ?, ?)";
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, vo.getEmail());
             pstmt.setString(2, vo.getPw());
             pstmt.setString(3, vo.getName());
             pstmt.setString(4, vo.getTel());
+            pstmt.setString(5, vo.getEmailChk());
 
             isInsert = pstmt.executeUpdate();
 
@@ -115,13 +124,88 @@ public enum DAOImpl implements DAO {
 
         return isInsert;
     }
+    
+    /** 메일 확인을 위한 메일 전송
+     * @param : email과 key값
+     * */
+    @Override
+    public void sendmail(String email, String key) {
+        final String username = SettingsValue.HOST; // 본인 이메일
+        final String password = SettingsValue.PW;   // 본인 비밀번호
+        final String host = "smtp.gmail.com";
+        
+        // SMTP(메일 서버) 설정
+        Properties props = new Properties();
+        props.put("mail.smtp.user", username);                  // SMTP에서 사용할 사용자 메일주소
+        props.put("mail.smtp.password", password);              // 비밀번호
+        props.put("mail.smtp.host", host);                      // host 서버 : gmail로 설정
+        props.put("mail.smtp.port", "25");                      // 25번 포트 사용
+        props.put("mail.debug", "true");                        // 디버그 설정
+        props.put("mail.smtp.auth", "true");                    // 인증 : true        
+        props.put("mail.smtp.starttls.enable", "true");         // tls 사용 허용
+//        props.put("mail.smtp.EnableSSL.enable", "true");      // SSL 사용 허용값인거 같은데 설정이 안먹는다.
+        props.put("mail.smtp.ssl.enable", "true");              // ssl 허용  
+        props.put("mail.smtp.ssl.trust", host);                 // ssl 신뢰 가능으로 설정(보안레벨)
+        
+        // propert값 설정
+        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   // socketFactory 설정을 ssl사용하기 때문에 SSLSocketFactory
+        props.setProperty("mail.smtp.socketFactory.fallback", "false");                         // fallback 설정 : false
+        props.setProperty("mail.smtp.port", "465");                                             // 465번 포트 사용(gmail 설정)
+        props.setProperty("mail.smtp.socketFactory.port", "465");                               // 마찬가지로 포트 설정
+        
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+        
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("admin@CosmoJspPJ.com"));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            
+            String content = "회원가입을 축하드립니다. 링크를 눌러 회원가입을 완료하세요."
+                            + "<a href='http://localhost/jsp_pj_lsj/emailChk.gu?key=" + key + "'>링크</a>";
+            message.setSubject("회원가입 인증 메일");
+            message.setContent(content, "text/html; charset=utf-8");
+            
+            System.out.println("send");
+            Transport.send(message);
+            System.out.println("SEND");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    /** 사용자 이메일 인증을 통한 확인
+     * @param : 인증키 값이 일치하면 회원 인증 허용
+     * */
+    @Override
+    public int emailChk(String key) {
+        int isAuth = 0;
+        String sql = "UPDATE USERVO SET auth=1 WHERE key=?";
+        
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, key);
+            
+            isAuth = pstmt.executeUpdate();
+            
+            if (isAuth == 1) Logger.log("isAuth", isAuth);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return isAuth;
+    }
 
     /** 사용자확인 위한 데이터 접근
      * @param : 아이디, 패스워드
      * 
      * @return
      * 성공 : 1
-     * 실패 : -1(비밀번호 오류), 0(쿼리오류:사용자 없음)
+     * 실패 : -1(비밀번호 오류), 0(쿼리오류:사용자 없음), -2(이메일 인증 오류)
      * */
     @Override
     public int userCheck(String id, String pw) {
@@ -138,7 +222,11 @@ public enum DAOImpl implements DAO {
 
             if (rs.next()) {
                 if (pw.equals(rs.getString("pw"))) {
-                    isUser = 1;
+                    if (rs.getInt("auth") == 1) {
+                        isUser = 1;
+                    } else {
+                        isUser = -2;
+                    }
                 } else {
                     isUser = -1;
                 }

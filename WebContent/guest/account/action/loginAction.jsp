@@ -19,6 +19,14 @@
                 }, 10);
             </script>
         </c:when>
+        <c:when test="${isUser == -2}">
+            <script type="text/javascript">
+                setTimeout(() => {
+                    alert("이메일이 인증되지 않았습니다. 이메일 인증 이후 다시이용해주세요.");
+                    window.history.back();
+                }, 10);
+            </script>
+        </c:when>
         <c:otherwise>
             <script type="text/javascript">
                 setTimeout(() => {

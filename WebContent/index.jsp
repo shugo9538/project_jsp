@@ -23,6 +23,7 @@
             </div>
         </article>
         <!-- 광고패널 종료 -->
+        
         <!-- 카테고리별 추천상품 -->
         <article class="main_content">
             <div class="category_list">
@@ -38,6 +39,7 @@
                     </ul>
                 </aside>
             </div>
+            
             <div class="product_list">
                 <div class="product_table">
                     <table border="1px" class="main_table">

@@ -65,6 +65,13 @@ public class GuestController extends HttpServlet {
             
             viewPage = INDEX_PAGE_URL;
             
+        // 이메일 인증
+        } else if (url.equals("/emailChk.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.emailChkAction(req, res);
+            
+            viewPage = INDEX_PAGE_URL;
+            
         // 로그인 페이지로 이동
         } else if (url.equals("/login.gu")) {
             System.out.println("[url ==> ]" + url);
@@ -124,14 +131,14 @@ public class GuestController extends HttpServlet {
             
             viewPage = "/guest/account/page/withdrawal.jsp";
             
-        // 회원탈퇴전 마지막 비밀번호 확인
+        // 회원탈퇴 전 마지막 비밀번호 확인
         } else if (url.equals("/withdrawalAction.gu")) {
             System.out.println("[url ==> ]" + url);
             service.confirmPw(req, res);
             
             viewPage = "/guest/account/action/withdrawalAction.jsp";
             
-        // 회원탈퇴전 설문조사
+        // 회원탈퇴 전 설문조사
         } else if (url.equals("/withdrawalSurvey.gu")) {
             System.out.println("[url ==> ]" + url);
             

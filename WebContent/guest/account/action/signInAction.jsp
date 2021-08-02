@@ -12,7 +12,7 @@
         <c:when test="${isInsert == 1}">
             <script type="text/javascript">
             	setTimeout(() => {
-            	    alert("회원가입되셨습니다. 로그인 후 이용해 주세요.");
+            	    alert("회원가입되셨습니다. 이메일 인증 후 이용해 주세요. 로그인 후 이용해 주세요.");
                     window.location = "index.gu";
                 }, 10);
             </script>
