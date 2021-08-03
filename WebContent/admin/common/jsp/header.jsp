@@ -6,15 +6,15 @@
 <title></title>
 </head>
 <body>
-    <!-- header -->
-    <header id="top">
-        <div class="user_state">
-            <ul>
-                <b>${sessionScope.vo.getName()}</b>
-                <li onclick="window.location='logout.adm'">로그아웃</li>
-            </ul>
-        </div>
-    </header>
-    <!-- header end -->
+	<!-- header -->
+	<header id="top">
+		<div class="user_state">
+			<ul>
+				<b>${sessionScope.vo.getName()}</b>
+				<li onclick="window.location='logout.adm'">로그아웃</li>
+			</ul>
+		</div>
+	</header>
+	<!-- header end -->
 </body>
 </html>

@@ -5,7 +5,7 @@
             <tr>
                 <th>상품명</th>
                 <td>
-                    <input type="text" name="" value="" size="50">
+                    <input type="text" name="" size="50">
                 </td>
             </tr>
             <tr>

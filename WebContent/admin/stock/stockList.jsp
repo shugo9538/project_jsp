@@ -58,13 +58,6 @@
                         </c:forEach>
                         </c:if>
                     </table>
-                    <div class="pager">
-                        <ul>
-                            <li>
-                                <button type="button" name="button">추가</button>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
                 <%@ include file="/admin/common/jsp/rightSideBar.jsp"%>
             </div>

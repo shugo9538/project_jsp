@@ -17,7 +17,7 @@ public class GuestServiceImpl implements GuestService {
     // 회원가입 처리
     @Override
     public void signInAction(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 사용자 입력정보 획득
         String email = req.getParameter("email");
@@ -47,7 +47,7 @@ public class GuestServiceImpl implements GuestService {
     // 이메일 인증
     @Override
     public void emailChkAction(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 사용자 입력정보 획득
         String key = req.getParameter("key");
@@ -62,7 +62,7 @@ public class GuestServiceImpl implements GuestService {
     // 로그인 처리
     @Override
     public void loginAction(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 로그인 아이디, 비밀번호 획득
         String id = req.getParameter("email");
@@ -79,7 +79,7 @@ public class GuestServiceImpl implements GuestService {
     // 로그인 처리 완료
     @Override
     public void loginComplete(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 로그인한 회원 정보 가져오기
         String id = req.getParameter("id").toString();
@@ -93,7 +93,7 @@ public class GuestServiceImpl implements GuestService {
     // 회원 삭제
     @Override
     public void deleteAction(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 세션에서 회원아이디 가지고오기
         vo = new UserVO();
@@ -113,7 +113,7 @@ public class GuestServiceImpl implements GuestService {
     // 회원정보 수정
     @Override
     public void editAction(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 수정 항목 받아와서 적용
         UserVO updateVO = (UserVO) req.getSession().getAttribute("vo");
@@ -135,7 +135,7 @@ public class GuestServiceImpl implements GuestService {
     // 회원 정보 완료 후 세션 재정렬
     @Override
     public void editComplete(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 수정된 사용자 정보 획득
         vo = (UserVO) req.getSession().getAttribute("vo");
@@ -151,7 +151,7 @@ public class GuestServiceImpl implements GuestService {
     // 비밀번호 확인
     @Override
     public void confirmPw(HttpServletRequest req, HttpServletResponse res) {
-        Logger.log("SERVICE", this.toString());
+        Log.i("SERVICE", this.toString());
         
         // 비밀번호 확인
         int chkPW = 0;

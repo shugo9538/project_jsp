@@ -19,7 +19,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import jsp_pj_lsj.util.Logger;
+import jsp_pj_lsj.util.Log;
 import jsp_pj_lsj.util.SettingsValue;
 import jsp_pj_lsj.vo.CategoryVO;
 import jsp_pj_lsj.vo.ProductVO;
@@ -29,8 +29,6 @@ public enum DAOImpl implements DAO {
     INSTANCE;
     
     private DataSource dataSource;
-    private Connection conn = null;
-    private PreparedStatement pstmt = null;
     private ResultSet rs = null;
 
     private DAOImpl() {
@@ -55,10 +53,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : IDCHECK");
         boolean isExists = false;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT * FROM USERVO WHERE id = ?";
-            pstmt = conn.prepareStatement(query);
+        String query = "SELECT * FROM USER_TBL WHERE id = ?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, id);
 
             rs = pstmt.executeQuery();
@@ -71,11 +68,7 @@ public enum DAOImpl implements DAO {
         } finally {
             try {
                 if (rs != null)
-                    rs.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
+                rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -96,10 +89,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : INSERT");
         int isInsert = 0;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "INSERT INTO USERVO(id, pw, name, tel, key) VALUES(?, ?, ?, ?, ?)";
-            pstmt = conn.prepareStatement(query);
+        String query = "INSERT INTO USER_TBL(id, pw, name, tel, key) VALUES(?, ?, ?, ?, ?)";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, vo.getEmail());
             pstmt.setString(2, vo.getPw());
             pstmt.setString(3, vo.getName());
@@ -111,15 +103,6 @@ public enum DAOImpl implements DAO {
         } catch (SQLException e) {
             e.printStackTrace();
 
-        } finally {
-            try {
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         return isInsert;
@@ -183,7 +166,7 @@ public enum DAOImpl implements DAO {
     @Override
     public int emailChk(String key) {
         int isAuth = 0;
-        String sql = "UPDATE USERVO SET auth=1 WHERE key=?";
+        String sql = "UPDATE USER_TBL SET auth=1 WHERE key=?";
         
         try(Connection conn = dataSource.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -191,7 +174,7 @@ public enum DAOImpl implements DAO {
             
             isAuth = pstmt.executeUpdate();
             
-            if (isAuth == 1) Logger.log("isAuth", isAuth);
+            if (isAuth == 1) Log.i("isAuth", isAuth);
             
         } catch (SQLException e) {
             e.printStackTrace();
@@ -212,10 +195,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : SELECT USER");
         int isUser = 0;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT * FROM USERVO WHERE id = ?";
-            pstmt = conn.prepareStatement(query);
+        String query = "SELECT * FROM USER_TBL WHERE id = ?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, id);
 
             rs = pstmt.executeQuery();
@@ -238,11 +220,7 @@ public enum DAOImpl implements DAO {
         } finally {
             try {
                 if (rs != null)
-                    pstmt.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
+                    rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -262,10 +240,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : SELECT USER");
         UserVO vo = new UserVO();
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT * FROM USERVO WHERE id = ?";
-            pstmt = conn.prepareStatement(query);
+        String query = "SELECT * FROM USER_TBL WHERE id = ?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, id);
 
             rs = pstmt.executeQuery();
@@ -285,11 +262,7 @@ public enum DAOImpl implements DAO {
         } finally {
             try {
                 if (rs != null)
-                    pstmt.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
+                    rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -310,26 +283,15 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : UPDATE USER");
         int isDeleted = 0;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "DELETE USERVO WHERE id=?";
-            pstmt = conn.prepareStatement(query);
+        String query = "DELETE USER_TBL WHERE id=?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, id);
 
             isDeleted = pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
-
-        } finally {
-            try {
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         return isDeleted;
@@ -347,10 +309,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : UPDATE USER");
         int isUpdated = 0;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "UPDATE USERVO SET pw=?, name=?, tel=?, alert=? WHERE id=?";
-            pstmt = conn.prepareStatement(query);
+        String query = "UPDATE USER_TBL SET pw=?, name=?, tel=?, alert=? WHERE id=?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, vo.getPw());
             pstmt.setString(2, vo.getName());
             pstmt.setString(3, vo.getTel());
@@ -364,15 +325,6 @@ public enum DAOImpl implements DAO {
         } catch (SQLException e) {
             e.printStackTrace();
 
-        } finally {
-            try {
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         return isUpdated;
@@ -389,47 +341,17 @@ public enum DAOImpl implements DAO {
     public void surveyResult(String reason) {
         System.out.println("DAO : UPDATE SURVEY");
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT survey_cnt FROM WITHDRAWAL_SURVEY WHERE reason LIKE ?";
-            pstmt = conn.prepareStatement(query);
+        String query = "UPDATE WITHDRAWAL_SURVEY SET survey_cnt=survey_cnt+1 WHERE reason LIKE ?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, reason);
             
-            rs = pstmt.executeQuery();
-            
-            // 설문 결과 가져오기
-            int cnt = 0;
-            if (rs.next()) {
-                cnt = rs.getInt("survey_cnt");
-            }
-            
-            pstmt.close();
-            conn.close();
-            
-            // 결과값에 이번에 선택된 값을 추가
-            conn = dataSource.getConnection();
-            String query2 = "UPDATE WITHDRAWAL_SURVEY SET survey_cnt=? WHERE reason LIKE ?";
-            pstmt = conn.prepareStatement(query2);
-            pstmt.setInt(1, cnt + 1);
-            pstmt.setString(2, reason);
-
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
 
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-
     }
     
     /* 관리자 데이터 접근 */
@@ -445,10 +367,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : SELECT USER");
         int isUser = 0;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT * FROM USERVO WHERE id = ? AND isAdmin = 1";
-            pstmt = conn.prepareStatement(query);
+        String query = "SELECT * FROM USER_TBL WHERE id = ? AND isAdmin = 1";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, id);
 
             rs = pstmt.executeQuery();
@@ -467,11 +388,7 @@ public enum DAOImpl implements DAO {
         } finally {
             try {
                 if (rs != null)
-                    pstmt.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
+                    rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -489,10 +406,9 @@ public enum DAOImpl implements DAO {
         List<CategoryVO> list = new ArrayList<>();
         CategoryVO vo = new CategoryVO();
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT * FROM CATEGORY ORDER BY category_id";
-            pstmt = conn.prepareStatement(query);
+        String query = "SELECT * FROM CATEGORY_TBL ORDER BY category_id";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
 
             rs = pstmt.executeQuery();
 
@@ -509,11 +425,7 @@ public enum DAOImpl implements DAO {
         } finally {
             try {
                 if (rs != null)
-                    pstmt.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
+                    rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -534,10 +446,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : INSERT CATEGORY");
         int isInsert = 0;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "INSERT INTO CATEGORY(category_id, category_name) VALUES(category_seq.nextval, ?)";
-            pstmt = conn.prepareStatement(query);
+        String query = "INSERT INTO CATEGORY_TBL(category_id, category_name) VALUES(category_seq.nextval, ?)";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, name);
 
             isInsert = pstmt.executeUpdate();
@@ -545,15 +456,6 @@ public enum DAOImpl implements DAO {
         } catch (SQLException e) {
             e.printStackTrace();
 
-        } finally {
-            try {
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         return isInsert;
@@ -571,10 +473,9 @@ public enum DAOImpl implements DAO {
         System.out.println("DAO : DELETE CATEGORY");
         int isDelete = 0;
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "DELETE FROM CATEGORY WHERE category_id = ?";
-            pstmt = conn.prepareStatement(query);
+        String query = "DELETE FROM CATEGORY_TBL WHERE category_id = ?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
             pstmt.setString(1, id);
 
             isDelete = pstmt.executeUpdate();
@@ -582,15 +483,6 @@ public enum DAOImpl implements DAO {
         } catch (SQLException e) {
             e.printStackTrace();
 
-        } finally {
-            try {
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         return isDelete;
@@ -605,10 +497,9 @@ public enum DAOImpl implements DAO {
         List<ProductVO> list = new ArrayList<>();
         ProductVO vo = new ProductVO();
 
-        try {
-            conn = dataSource.getConnection();
-            String query = "SELECT * FROM CATEGORY ORDER BY category_id";
-            pstmt = conn.prepareStatement(query);
+        String query = "SELECT * FROM CATEGORY_TBL ORDER BY category_id";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
 
             rs = pstmt.executeQuery();
 
@@ -622,12 +513,7 @@ public enum DAOImpl implements DAO {
 
         } finally {
             try {
-                if (rs != null)
-                    pstmt.close();
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
+                if (rs != null) rs.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
