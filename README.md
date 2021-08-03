@@ -30,3 +30,17 @@ View :
       /admin
         - /account : 로그인 세션 관리
         - /category : 카테고리 추가, 삭제 및 목록 확인 페이지
+
+
+![image](https://user-images.githubusercontent.com/28711917/127891988-e1acc734-29dc-4aa2-800e-c24c131d92ea.png "쿠키(세션)에 대한 이미지")
+
+그림1. 쿠키(세션)에 대한 이미지
+
+request.getSession() : 서버와 사용자 간에 지정된(공유된) 자원의 데이터를 가지고 오는 것 ex) 사용자의 로그인 상태
+request.getParameter(), request.getAttribute() : 일회성 요청에 대한 데이터를 가지고 오는 것 ex) 폼에 입력된 (회원가입에 필요한 정보, 로그인 정보)을 전달하기 위해 사용
+
+session - 지속적으로 서버와 데이터를 공유하고 있는 자원 => 언제까지? context.xml에 Resource태그에 선언한 timeout시간동안 보유 혹은 invalidate()메서드와 같이 세션을 종료하는 메서드가 
+
+REFERENCE
+
+그림1. http://jun.hansung.ac.kr/SWP/PHP/PHP%20Sessions.html
