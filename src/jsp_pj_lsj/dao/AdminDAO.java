@@ -32,6 +32,9 @@ public interface AdminDAO {
     public int productAdd(ProductVO vo);
     
     // 상품 정보 수정
+    public ProductVO getProductDetail(int id);
+    
+    // 상품 정보 수정
     public int productUpdate(ProductVO vo);
     
     // 상품 삭제

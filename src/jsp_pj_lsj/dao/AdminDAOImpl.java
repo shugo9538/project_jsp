@@ -297,10 +297,60 @@ public enum AdminDAOImpl implements AdminDAO {
         return isInsert;
     }
 
+    /** 상품 등록
+     * @param : ㅑㅇ
+     * 
+     * @return
+     * 성공 : ProductVO = (product_tbl + category_tbl)
+     * */
+    @Override
+    public ProductVO getProductDetail(int id) {
+        Log.i(this.getClass().getName(), "productUpdate");
+        ProductVO vo = new ProductVO();
+
+        String query = "SELECT * FROM product_tbl p, category_tbl c WHERE product_id=? AND p.product_category = c.category_id";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                vo.setProductId(rs.getInt("product_id"));
+                vo.setProductName(rs.getString("product_name"));
+                vo.setProductPrice(rs.getInt("product_price"));
+                vo.setProductArrival(rs.getInt("product_arrival"));
+                vo.setProductStock(rs.getInt("product_stock"));
+                vo.setProductEnrollment(rs.getDate("product_enrollment"));
+                vo.setProductImg(rs.getString("product_img"));
+                vo.setProductEa(rs.getString("product_ea"));
+                vo.setProductProducer(rs.getString("product_producer"));
+                vo.setProductOrigin(rs.getString("product_origin"));
+                vo.setProductContent(rs.getString("product_content"));
+                vo.setCategoryId(rs.getInt("category_id"));
+                vo.setCategoryName(rs.getString("category_name"));
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return vo;
+    }
+
     @Override
     public int productUpdate(ProductVO vo) {
+        Log.i(this.getClass().getName(), "productUpdate");
+        int isUpdate = 0;
+
+        String query = "DELETE FROM product_tbl WHERE product_id=?";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query)) {
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         
-        return 0;
+        return isUpdate;
     }
 
     /** 상품 등록

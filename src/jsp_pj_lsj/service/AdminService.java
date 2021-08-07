@@ -31,6 +31,9 @@ public interface AdminService {
     // 재고 수정
     public void stockModify(HttpServletRequest req, HttpServletResponse res);
     
+    // 재고 수정 처리
+    public void stockModifyAction(HttpServletRequest req, HttpServletResponse res);
+    
     // 환불목록
     public void refundList(HttpServletRequest req, HttpServletResponse res);
     

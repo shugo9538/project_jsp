@@ -112,11 +112,18 @@ public class AdminController extends HttpServlet {
             viewPage = "/admin/stock/stockList.jsp";
 
         // 상품 수정
+        } else if (url.equals("/stockModify.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.stockModify(req, res);
+
+            viewPage = "/admin/stock/stockModify.jsp";
+
+        // 상품 수정 처리
         } else if (url.equals("/stockModifyAction.adm")) {
             System.out.println("[url ==> ]" + url);
             service.stockModify(req, res);
 
-            viewPage = "/admin/stock/stockList.jsp";
+            viewPage = "/admin/stock/stockModifyAction.jsp";
 
         // 환불관리 페이지
         } else if (url.equals("/refundList.adm")) {

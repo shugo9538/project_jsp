@@ -34,17 +34,10 @@
             <div class="has_side">
                 <%@ include file="/admin/common/jsp/leftSideBar.jsp"%>
                 <div class="inquire">
-                	<c:if test="${isModify eq null}">
                 	<input id="toggleBtn" type="button" onclick="toggleAdd();" value="상품 추가">
-		                <div id="addProduct">
-		                	<%@ include file="/admin/stock/stockAdd.jsp"%>
-		                </div>
-	                </c:if>
-	                <c:if test="${isModify eq not null}">
-		                <div>
-		                	<%@ include file="/admin/stock/stockModify.jsp"%>
-		                </div>
-	                </c:if>
+	                <div id="addProduct">
+	                	<%@ include file="/admin/stock/stockAdd.jsp"%>
+	                </div>
                     <table>
                         <tr>
                             <th>번호</th>
@@ -76,7 +69,7 @@
                                 <td>
                                     <ul>
                                         <li>
-                                            <input type="button" name="modiBtn" onclick="window.location='stockModifyAction.adm?id=${vo.getProductId()}'" value="수정">
+                                            <input type="button" name="modiBtn" onclick="window.location='stockModify.adm?id=${vo.getProductId()}'" value="수정">
                                             <input type="button" name="delBtn" onclick="window.location='stockDeleteAction.adm?id=${vo.getProductId()}'" value="삭제">
                                         </li>
                                     </ul>

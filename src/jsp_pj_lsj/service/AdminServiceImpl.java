@@ -148,6 +148,22 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void stockModify(HttpServletRequest req, HttpServletResponse res) {
         Log.i(this.getClass().toString(), "stockModify");
+        
+        int id = Integer.parseInt(req.getParameter("id"));
+        ProductVO vo = adminDAO.getProductDetail(id);
+        ArrayList<CategoryVO> category = (ArrayList<CategoryVO>) adminDAO.categoryList();
+        
+        req.setAttribute("vo", vo);
+        req.setAttribute("categoryVO", category);
+    }
+    
+    // 상품정보 수정
+    @Override
+    public void stockModifyAction(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().toString(), "stockModifyAction");
+        
+        int id = Integer.parseInt(req.getParameter("id"));
+        ProductVO vo = adminDAO.getProductDetail(id);
     }
 
     // 환불목록
