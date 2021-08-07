@@ -3,15 +3,18 @@ package jsp_pj_lsj.service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jsp_pj_lsj.dao.DAO;
-import jsp_pj_lsj.dao.DAOImpl;
+import jsp_pj_lsj.dao.AdminDAO;
+import jsp_pj_lsj.dao.AdminDAOImpl;
+import jsp_pj_lsj.dao.GuestDAO;
+import jsp_pj_lsj.dao.GuestDAOImpl;
 import jsp_pj_lsj.util.EmailChkHandler;
 import jsp_pj_lsj.vo.UserVO;
 import jsp_pj_lsj.util.*;
 
 
 public class GuestServiceImpl implements GuestService {
-    private DAO dao = DAOImpl.INSTANCE;
+    private GuestDAO guestDAO = GuestDAOImpl.INSTANCE;
+    private AdminDAO adminDAO = AdminDAOImpl.INSTANCE;
     private UserVO vo = null;
     
     // 회원가입 처리
@@ -30,15 +33,15 @@ public class GuestServiceImpl implements GuestService {
         vo.setEmailChk(key);
         
         // 회원가입 요청
-        int isInsert = dao.insertGuest(vo);
+        int isInsert = guestDAO.insertGuest(vo);
         
         // 실패 시 중복정보인지 확인
         boolean isExists = true;
         if (isInsert == 0) {
-            isExists = dao.idCheck(vo.getEmail());
+            isExists = guestDAO.idCheck(vo.getEmail());
         }
         if (!isExists) isInsert = 2;
-        else dao.sendmail(email, key);
+        else guestDAO.sendmail(email, key);
         
         // 회원가입 결과
         req.setAttribute("isInsert", isInsert);
@@ -53,7 +56,7 @@ public class GuestServiceImpl implements GuestService {
         String key = req.getParameter("key");
         
         // 이메일 인증 확인
-        int isAuth = dao.emailChk(key);
+        int isAuth = guestDAO.emailChk(key);
         
         // 회원가입 결과
         req.setAttribute("isAuth", isAuth);
@@ -69,7 +72,7 @@ public class GuestServiceImpl implements GuestService {
         String pw = req.getParameter("pw");
 
         // 사용자 정보 확인
-        int isUser = dao.userCheck(id, pw);
+        int isUser = guestDAO.userCheck(id, pw);
         
         // 사용자 정보 설정
         req.setAttribute("isUser", isUser);
@@ -84,7 +87,7 @@ public class GuestServiceImpl implements GuestService {
         // 로그인한 회원 정보 가져오기
         String id = req.getParameter("id").toString();
         vo = new UserVO();
-        vo = dao.getGuestInfo(id);
+        vo = guestDAO.getGuestInfo(id);
         
         // 로그인 결과 세션에 적용
         req.getSession().setAttribute("vo", vo);
@@ -100,10 +103,10 @@ public class GuestServiceImpl implements GuestService {
         vo = (UserVO) req.getSession().getAttribute("vo");
         
         // 삭제요청
-        int isDeleted = dao.deleteGuest(vo.getEmail());
+        int isDeleted = guestDAO.deleteGuest(vo.getEmail());
         if (isDeleted == 1) {
             req.getSession().invalidate();
-            dao.surveyResult(req.getParameter("reason").toString());
+            adminDAO.surveyResult(req.getParameter("reason").toString());
         }
         
         // 삭제 결과
@@ -126,7 +129,7 @@ public class GuestServiceImpl implements GuestService {
         updateVO.setTel(req.getParameter("reTel")); 
         
         // 업데이트 요청
-        int isUpdated = dao.updateGuest(updateVO);
+        int isUpdated = guestDAO.updateGuest(updateVO);
         
         // 업데이트 결과
         req.setAttribute("isUpdated", isUpdated);
@@ -142,7 +145,7 @@ public class GuestServiceImpl implements GuestService {
         String email = vo.getEmail();
         
         // 업데이트 요청
-        vo = dao.getGuestInfo(email);
+        vo = guestDAO.getGuestInfo(email);
         
         // 업데이트 결과
         req.getSession().setAttribute("vo", vo);
@@ -165,5 +168,4 @@ public class GuestServiceImpl implements GuestService {
         // 업데이트 결과
         req.setAttribute("chkPW", chkPW);
     }
-    
 }

@@ -22,4 +22,19 @@ public interface AdminService {
     // 재고목록
     public void stockList(HttpServletRequest req, HttpServletResponse res);
     
+    // 재고추가
+    public void stockAdd(HttpServletRequest req, HttpServletResponse res);
+    
+    // 재고삭제
+    public void stockDelete(HttpServletRequest req, HttpServletResponse res);
+    
+    // 재고 수정
+    public void stockModify(HttpServletRequest req, HttpServletResponse res);
+    
+    // 환불목록
+    public void refundList(HttpServletRequest req, HttpServletResponse res);
+    
+    // 환불처리 (처리 1, 반려 0)
+    public void refundAction(HttpServletRequest req, HttpServletResponse res);
+    
 }

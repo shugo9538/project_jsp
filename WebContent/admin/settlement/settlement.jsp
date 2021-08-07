@@ -23,11 +23,10 @@
 							<td>12,000원</td>
 						</tr>
 						<tr>
-							<td colspan="2">
-								<img alt="" src="../../common/img/다운로드.png">
-							</td>
+							<td colspan="2"></td>
 						</tr>
 					</table>
+					<div id="myPieChart" style="width: 400; height: 300"></div>
 				</div>
 				<%@ include file="/admin/common/jsp/rightSideBar.jsp"%>
 			</div>

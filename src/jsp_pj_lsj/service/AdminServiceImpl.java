@@ -5,91 +5,162 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jsp_pj_lsj.dao.DAOImpl;
+import jsp_pj_lsj.dao.AdminDAO;
+import jsp_pj_lsj.dao.AdminDAOImpl;
+import jsp_pj_lsj.dao.GuestDAO;
+import jsp_pj_lsj.dao.GuestDAOImpl;
+import jsp_pj_lsj.util.Log;
 import jsp_pj_lsj.vo.CategoryVO;
 import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
 
 public class AdminServiceImpl implements AdminService {
-    private DAOImpl dao = DAOImpl.INSTANCE;
+    private AdminDAO adminDAO = AdminDAOImpl.INSTANCE;
+    private GuestDAO guestDAO = GuestDAOImpl.INSTANCE;
     private UserVO vo = null;
-    
+
     // 로그인시 사용자 정보 확인
     @Override
     public void loginAction(HttpServletRequest req, HttpServletResponse res) {
-        System.out.println("SERVICE : loginAction");
-        
+        Log.i(this.getClass().toString(), "loginAction");
+
         // 로그인 아이디, 비밀번호 획득
         String id = req.getParameter("email");
         String pw = req.getParameter("pw");
 
         // 사용자 정보 확인
-        int isUser = dao.adminCheck(id, pw);
-        
+        int isUser = adminDAO.adminCheck(id, pw);
+
         // 사용자 정보 설정
         req.setAttribute("isUser", isUser);
         req.setAttribute("id", id);
     }
-    
+
     // 로그인 처리 완료
     @Override
     public void loginComplete(HttpServletRequest req, HttpServletResponse res) {
-        System.out.println("SERVICE : loginComplete");
-        
+        Log.i(this.getClass().toString(), "loginComplete");
+
         // 로그인한 회원 정보 가져오기
         String id = req.getParameter("id").toString();
         vo = new UserVO();
-        vo = dao.getGuestInfo(id);
-        
+        vo = guestDAO.getGuestInfo(id);
+
         // 로그인 결과 세션에 적용
         req.getSession().setAttribute("vo", vo);
     }
 
+    // 카테고리 리스트 호출
     @Override
     public void categoryList(HttpServletRequest req, HttpServletResponse res) {
-        System.out.println("SERVICE : categoryList");
-        
+        Log.i(this.getClass().toString(), "categoryList");
+
         // 모든 카테고리 정보 가져오기
-        ArrayList<CategoryVO> list = (ArrayList<CategoryVO>) dao.categoryList();
-        
+        ArrayList<CategoryVO> list = (ArrayList<CategoryVO>) adminDAO.categoryList();
+
         // 결과 반환
         req.setAttribute("categoryVO", list);
     }
 
+    // 카테고리 추가
     @Override
     public void categoryAdd(HttpServletRequest req, HttpServletResponse res) {
-        System.out.println("SERVICE : categoryAdd");
-        
+        Log.i(this.getClass().toString(), "categoryAdd");
+
         // 카테고리 데이터 추가
         String id = req.getParameter("category_name");
-        int isInsert = dao.categoryAdd(id);
-        
+        int isInsert = adminDAO.categoryAdd(id);
+
         // 결과 반환
         req.setAttribute("isError", isInsert);
     }
 
+    // 카테고리 삭제
     @Override
     public void categoryDelete(HttpServletRequest req, HttpServletResponse res) {
-        System.out.println("SERVICE : categoryAdd");
-        
+        Log.i(this.getClass().toString(), "categoryDelete");
+
         // 카테고리 데이터 삭제
         String id = req.getParameter("categoryId");
-        int isDelete = (dao.categoryDelete(id) == 1) ? 1 : -1;
-       
+        int isDelete = (adminDAO.categoryDelete(id) == 1) ? 1 : -1;
+
         // 결과 반환
         req.setAttribute("isError", isDelete);
     }
 
+    // 재고목록
     @Override
     public void stockList(HttpServletRequest req, HttpServletResponse res) {
-        System.out.println("SERVICE : stockList");
-        
+        Log.i(this.getClass().toString(), "stockList");
+
         // 재고 목록 데이터
-        ArrayList<ProductVO> list = (ArrayList<ProductVO>) dao.productList();
-       
+        ArrayList<ProductVO> list = (ArrayList<ProductVO>) adminDAO.productList();
+        ArrayList<CategoryVO> category = (ArrayList<CategoryVO>) adminDAO.categoryList();
+        
+        for (ProductVO vo : list) {
+            for (CategoryVO name : category) {
+                if (vo.getCategoryId() == name.getCategoryId()) {
+                    vo.setCategoryName(name.getCategoryName());
+                    break;
+                }
+            }
+        }
+
         // 결과 반환
-        req.setAttribute("productVO", list);       
+        req.setAttribute("productVO", list);
+        req.setAttribute("categoryVO", category);
     }
-    
-    
+
+    // 재고 추가
+    @Override
+    public void stockAdd(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().toString(), "stockAdd");
+        ProductVO vo = new ProductVO();
+        
+        vo.setProductName(req.getParameter("productName"));
+        vo.setProductPrice(Integer.parseInt(req.getParameter("productPrice")));
+        vo.setProductStock(Integer.parseInt(req.getParameter("productStock")));
+        vo.setProductImg(req.getParameter("productImg"));
+        vo.setProductEa(req.getParameter("productEA"));
+        vo.setProductProducer(req.getParameter("productProducer"));
+        vo.setProductOrigin(req.getParameter("productOrigin"));
+        vo.setCategoryId(Integer.parseInt(req.getParameter("categoryId")));
+        vo.setProductContent(req.getParameter("productContent"));
+        vo.setCategoryName(adminDAO.getCategory(vo.getCategoryId()));
+        
+        int isInsert = adminDAO.productAdd(vo);
+        
+        req.setAttribute("isError", isInsert);
+    }
+
+    // 재고삭제
+    @Override
+    public void stockDelete(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().toString(), "stockDelete");
+        
+        int id = Integer.parseInt(req.getParameter("id"));
+        int isDelete = adminDAO.productDelete(id);
+        
+        req.setAttribute("isError", isDelete);
+    }
+
+    // 상품정보 수정
+    @Override
+    public void stockModify(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().toString(), "stockModify");
+    }
+
+    // 환불목록
+    @Override
+    public void refundList(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().toString(), "refundList");
+    }
+
+    // 환불요청
+    @Override
+    public void refundAction(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().toString(), "refundAction");
+
+    }
+
 }

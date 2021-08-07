@@ -34,20 +34,20 @@ public class AdminController extends HttpServlet {
         String contextPath = req.getContextPath();
         String url = uri.substring(contextPath.length());
 
-            // 관리자 페이지 시작지점
+        // 관리자 페이지 시작지점
         if (url.equals("/admin.adm")) {
             System.out.println("[url ==> ]" + url);
 
             viewPage = "/admin.jsp";
 
-            // 로그인 처리
+        // 로그인 처리
         } else if (url.equals("/loginAction.adm")) {
             System.out.println("[url ==> ]" + url);
             service.loginAction(req, res);
 
             viewPage = "/admin/account/action/loginAction.jsp";
 
-            // 로그인 완료 후 세션 적용과 이동
+        // 로그인 완료 후 세션 적용과 이동
         } else if (url.equals("/loginComplete.adm")) {
             System.out.println("[url ==> ]" + url);
             service.loginComplete(req, res);
@@ -57,14 +57,14 @@ public class AdminController extends HttpServlet {
 
             viewPage = "/admin/category/categoryList.jsp";
 
-            // 로그아웃
+        // 로그아웃
         } else if (url.equals("/logout.adm")) {
             System.out.println("[url ==> ]" + url);
             req.getSession().invalidate();
 
             viewPage = "/admin.jsp";
 
-            // 카테고리 목록
+        // 카테고리 목록
         } else if (url.equals("/categoryList.adm")) {
             System.out.println("[url ==> ]" + url);
             service.categoryList(req, res);
@@ -73,7 +73,7 @@ public class AdminController extends HttpServlet {
 
             viewPage = "/admin/category/categoryList.jsp";
 
-            // 카테고리 추가
+        // 카테고리 추가
         } else if (url.equals("/categoryAddAction.adm")) {
             System.out.println("[url ==> ]" + url);
             service.categoryAdd(req, res);
@@ -81,7 +81,7 @@ public class AdminController extends HttpServlet {
 
             viewPage = "/admin/category/categoryList.jsp";
 
-            // 카테고리 삭제
+        // 카테고리 삭제
         } else if (url.equals("/categoryDeleteAction.adm")) {
             System.out.println("[url ==> ]" + url);
             service.categoryDelete(req, res);
@@ -89,33 +89,50 @@ public class AdminController extends HttpServlet {
 
             viewPage = "/admin/category/categoryList.jsp";
 
-            // 재고관리 페이지
+        // 재고관리 페이지
         } else if (url.equals("/stockList.adm")) {
             System.out.println("[url ==> ]" + url);
+            service.stockList(req, res);
+            req.setAttribute("isOk", 1);
 
             viewPage = "/admin/stock/stockList.jsp";
 
-            // 환불관리 페이지
+        // 재고 추가 페이지
+        } else if (url.equals("/stockAddAction.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.stockAdd(req, res);
+
+            viewPage = "/admin/stock/stockList.jsp";
+
+        // 상품 삭제
+        } else if (url.equals("/stockDeleteAction.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.stockDelete(req, res);
+
+            viewPage = "/admin/stock/stockList.jsp";
+
+        // 상품 수정
+        } else if (url.equals("/stockModifyAction.adm")) {
+            System.out.println("[url ==> ]" + url);
+            service.stockModify(req, res);
+
+            viewPage = "/admin/stock/stockList.jsp";
+
+        // 환불관리 페이지
         } else if (url.equals("/refundList.adm")) {
             System.out.println("[url ==> ]" + url);
-            service.categoryAdd(req, res);
-            service.categoryList(req, res);
 
             viewPage = "/admin/refund/refund.jsp";
 
-            // 리뷰관리 페이지
+        // 리뷰관리 페이지
         } else if (url.equals("/reviewList.adm")) {
             System.out.println("[url ==> ]" + url);
-            service.categoryAdd(req, res);
-            service.categoryList(req, res);
 
             viewPage = "/admin/review/reviewList.jsp";
 
-            // 결산 확인 페이지
+        // 결산 확인 페이지
         } else if (url.equals("/settlement.adm")) {
             System.out.println("[url ==> ]" + url);
-            service.categoryAdd(req, res);
-            service.categoryList(req, res);
 
             viewPage = "/admin/settlement/settlement.jsp";
         }

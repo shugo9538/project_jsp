@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -21,17 +19,15 @@ import javax.sql.DataSource;
 
 import jsp_pj_lsj.util.Log;
 import jsp_pj_lsj.util.SettingsValue;
-import jsp_pj_lsj.vo.CategoryVO;
-import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
 
-public enum DAOImpl implements DAO {
+public enum GuestDAOImpl implements GuestDAO {
     INSTANCE;
     
     private DataSource dataSource;
     private ResultSet rs = null;
 
-    private DAOImpl() {
+    private GuestDAOImpl() {
         try {
             Context context = new InitialContext();
             dataSource = (DataSource) context.lookup("java:comp/env/jdbc/jsp_pj_lsj");
@@ -86,7 +82,7 @@ public enum DAOImpl implements DAO {
      * */
     @Override
     public int insertGuest(UserVO vo) {
-        System.out.println("DAO : INSERT");
+        Log.i(this.getClass().toString(), "insertGuest");
         int isInsert = 0;
 
         String query = "INSERT INTO USER_TBL(id, pw, name, tel, key) VALUES(?, ?, ?, ?, ?)";
@@ -329,199 +325,4 @@ public enum DAOImpl implements DAO {
 
         return isUpdated;
     }
-
-    /** 설문결과 저장하기
-     * @param : 이유
-     * 
-     * @return
-     * 성공 : 1
-     * 실패 : 0
-     * */
-    @Override
-    public void surveyResult(String reason) {
-        System.out.println("DAO : UPDATE SURVEY");
-
-        String query = "UPDATE WITHDRAWAL_SURVEY SET survey_cnt=survey_cnt+1 WHERE reason LIKE ?";
-        try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);) {
-            pstmt.setString(1, reason);
-            
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-    }
-    
-    /* 관리자 데이터 접근 */
-    /** 관리자 로그인
-     * @param : 아이디, 패스워드
-     * 
-     * @return
-     * 성공 : 1
-     * 실패 : -1(비밀번호 오류), 0(쿼리오류:사용자 없음)
-     * */
-    @Override
-    public int adminCheck(String id, String pw) {
-        System.out.println("DAO : SELECT USER");
-        int isUser = 0;
-
-        String query = "SELECT * FROM USER_TBL WHERE id = ? AND isAdmin = 1";
-        try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);) {
-            pstmt.setString(1, id);
-
-            rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                if (pw.equals(rs.getString("pw"))) {
-                    isUser = 1;
-                } else {
-                    isUser = -1;
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (rs != null)
-                    rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return isUser;
-    }
-
-    /** 카테고리 리스트 읽어오기
-     * @return 모든 카테고리 리스트
-     * */
-    @Override
-    public List<CategoryVO> categoryList() {
-        System.out.println("DAO : SELECT CATEGORY");
-        List<CategoryVO> list = new ArrayList<>();
-        CategoryVO vo = new CategoryVO();
-
-        String query = "SELECT * FROM CATEGORY_TBL ORDER BY category_id";
-        try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);) {
-
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                vo = new CategoryVO();
-                vo.setCategoryId(rs.getInt("category_id")); 
-                vo.setCategoryName(rs.getString("category_name")); 
-                list.add(vo);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (rs != null)
-                    rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return list;
-    }
-
-    /** 카테고리 추가
-     * @param : 카테고리 이름추가
-     * 
-     * @return
-     * 성공 : 1
-     * 실패 : 0
-     * */
-    @Override
-    public int categoryAdd(String name) {
-        System.out.println("DAO : INSERT CATEGORY");
-        int isInsert = 0;
-
-        String query = "INSERT INTO CATEGORY_TBL(category_id, category_name) VALUES(category_seq.nextval, ?)";
-        try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);) {
-            pstmt.setString(1, name);
-
-            isInsert = pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-
-        return isInsert;
-    }
-
-    /** 카테고리 삭제
-     * @param : 카테고리 아이디
-     * 
-     * @return
-     * 성공 : 1
-     * 실패 : 0
-     * */
-    @Override
-    public int categoryDelete(String id) {
-        System.out.println("DAO : DELETE CATEGORY");
-        int isDelete = 0;
-
-        String query = "DELETE FROM CATEGORY_TBL WHERE category_id = ?";
-        try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);) {
-            pstmt.setString(1, id);
-
-            isDelete = pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-
-        return isDelete;
-    }
-
-    /** 상품 리스트 읽어오기
-     * @return 모든 상품 리스트
-     * */
-    @Override
-    public List<ProductVO> productList() {
-        System.out.println("DAO : SELECT PRODCUT");
-        List<ProductVO> list = new ArrayList<>();
-        ProductVO vo = new ProductVO();
-
-        String query = "SELECT * FROM CATEGORY_TBL ORDER BY category_id";
-        try(Connection conn = dataSource.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(query);) {
-
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                vo = new ProductVO();
-                list.add(vo);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        } finally {
-            try {
-                if (rs != null) rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return list;
-    }
-    
-    
-    
 }
