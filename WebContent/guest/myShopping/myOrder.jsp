@@ -45,14 +45,14 @@
 					<%@ include file="/common/jsp/rightSideBar.jsp"%>
 				</article>
 			</section>
-			<div id="bottom" />
-			<%@ include file="/common/jsp/footer.jsp"%>
-		</c:when>
+		<%@ include file="/common/jsp/footer.jsp"%>
+	<div id="bottom" />
+	</c:when>
 		<c:otherwise>
 			<script type="text/javascript">
             	setTimeout(() => {
                     alert("로그인 후에 이용해 주세요!");
-                   	window.history.back();
+                   	window.location="login.gu";
                 }, 10);
             </script>
 		</c:otherwise>

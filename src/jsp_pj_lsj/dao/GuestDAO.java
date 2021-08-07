@@ -1,5 +1,10 @@
 package jsp_pj_lsj.dao;
 
+import java.util.List;
+
+import jsp_pj_lsj.vo.CategoryVO;
+import jsp_pj_lsj.vo.ProductVO;
+import jsp_pj_lsj.vo.QnaVO;
 import jsp_pj_lsj.vo.UserVO;
 
 public interface GuestDAO {
@@ -27,4 +32,16 @@ public interface GuestDAO {
     
     // 회원정보 수정 처리
     public int updateGuest(UserVO vo);
+    
+    // 문의하기
+    public int addQna(QnaVO vo);
+    
+    // 상품 목록 페이지
+    public List<ProductVO> productList(int categoryId);
+    
+    // 상품 정보 화면
+    public ProductVO productDetail(int productId);
+    
+    // 상품 정보 화면
+    public List<CategoryVO> categoryList();
 }

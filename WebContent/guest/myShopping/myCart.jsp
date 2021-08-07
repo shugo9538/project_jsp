@@ -14,38 +14,77 @@
 			<%@ include file="/common/jsp/header.jsp"%>
 			<%@ include file="/common/jsp/nav.jsp"%>
 			<section>
-				<article class="has_side">
-					<%@ include file="/common/jsp/leftSideBar.jsp"%>
-					<!-- content -->
-					<div class="main_body">
-						<div class="headline">
-							<h3>2021. 7.15.</h3>
-						</div>
-						<table border="1px">
+				<div class="content_width">
+					<div class="titleline">
+						<i class="fas fa-shopping-cart"> 장바구니 </i>
+						<ul>
+							<li>
+								<b>장바구니</b>
+								>
+							</li>
+							<li>주문/결제 ></li>
+							<li>주문완료</li>
+						</ul>
+					</div>
+					<hr>
+					<div class="cart">
+						<table>
 							<tr>
-								<th colspan="3">오늘 도착 예정</th>
-								<td rowspan="3">
-									<button type="button" name="button">주문취소</button>
-								</td>
+								<th>
+									<input type="checkbox" name="" value="">
+									<label for="">전체선택</label>
+								</th>
+								<th>상품정보</th>
+								<th>상품금액</th>
+								<th>배송비</th>
 							</tr>
+							<!-- content -->
 							<tr>
 								<td rowspan="2">
-									<img src="../../common/img/ad1.jpg" alt="" width="150px">
+									<input type="checkbox" name="" value="">
+									<label for=""> img </label>
 								</td>
-								<td colspan="2">사과</td>
+								<td>충주사과</td>
+								<td rowspan="2">12,900원</td>
+								<td rowspan="2">무료</td>
 							</tr>
 							<tr>
-								<td>12,900원</td>
 								<td>
-									<button type="button" name="button">장바구니 담기</button>
+									7/15까지 도착 보장
+									<select class="" name="">
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+									</select>
+									12,900원
+									<input type="button" name="" value="X">
 								</td>
 							</tr>
 						</table>
 					</div>
-					<%@ include file="/common/jsp/rightSideBar.jsp"%>
-				</article>
+				</div>
+				<div border="1px solid">
+					<table>
+						<tr>
+							<td>총 상품 가격 15,900원 + 배송비 0원 = 총 주문금액 15,900원</td>
+						</tr>
+					</table>
+				</div>
+				<div class="pager">
+					<ul>
+						<li>
+							<button type="button" name="button">
+								<a href="index.gu"> 계속 쇼핑하기 </a>
+							</button>
+						</li>
+						<li>
+							<button type="button" name="button">
+								<a href="order.gu"> 구매하기 </a>
+							</button>
+						</li>
+					</ul>
+				</div>
 			</section>
-			<div id="bottom" />
 			<%@ include file="/common/jsp/footer.jsp"%>
 		</c:when>
 		<c:otherwise>

@@ -18,6 +18,7 @@
 				<%@ include file="/admin/common/jsp/leftSideBar.jsp"%>
 				<div class="inquire">
 					<form class="" action="stockModifyAction.adm" method="post">
+						<input type="hidden" name="productId" value="${vo.getProductId()}">
 						<legend>상품 수정</legend>
 						<fieldset>
 							<table>

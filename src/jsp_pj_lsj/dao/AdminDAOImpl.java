@@ -337,15 +337,36 @@ public enum AdminDAOImpl implements AdminDAO {
         return vo;
     }
 
+    /** 상품 수정
+     * @param : ProductVO
+     * 
+     * @return
+     * 성공 : 1
+     * 실패 : -2
+     * */
     @Override
     public int productUpdate(ProductVO vo) {
         Log.i(this.getClass().getName(), "productUpdate");
-        int isUpdate = 0;
+        int isUpdate = -2;
 
-        String query = "DELETE FROM product_tbl WHERE product_id=?";
+        String query = "UPDATE product_tbl SET product_name=?, product_price=?, product_stock=?, product_img=?, "
+                + "product_ea=?, product_producer=?, product_origin=?, product_category=?, product_content=? "
+                + "WHERE product_id=?";
         try(Connection conn = dataSource.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            pstmt.setString(1, vo.getProductName());
+            pstmt.setInt(2, vo.getProductPrice());
+            pstmt.setInt(3, vo.getProductStock());
+            pstmt.setString(4, vo.getProductImg());
+            pstmt.setString(5, vo.getProductEa());
+            pstmt.setString(6, vo.getProductProducer());
+            pstmt.setString(7, vo.getProductOrigin());
+            pstmt.setInt(8, vo.getCategoryId());
+            pstmt.setString(9, vo.getProductContent());
+            pstmt.setInt(10, vo.getProductId());
             
+            isUpdate = pstmt.executeUpdate();
+            if (isUpdate == 0) isUpdate = -2;        
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -371,6 +392,7 @@ public enum AdminDAOImpl implements AdminDAO {
             pstmt.setInt(1, id);
             
             isDelete = pstmt.executeUpdate();
+            if (isDelete == 0) isDelete = -1;
             
         } catch (SQLException e) {
             e.printStackTrace();

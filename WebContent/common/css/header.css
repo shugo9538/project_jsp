@@ -4,7 +4,6 @@ header {
     width: 1000px;
     height: 32px;
     font-size: 13px;
-    
 }
 
 .user_state ul {
@@ -18,6 +17,7 @@ header {
     margin: 5px;
     font-family: monospace;
 }
+
 .user_state ul li:hover {
     text-decoration: underline;
     background: skyblue;

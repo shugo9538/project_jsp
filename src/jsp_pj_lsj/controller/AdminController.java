@@ -121,9 +121,9 @@ public class AdminController extends HttpServlet {
         // 상품 수정 처리
         } else if (url.equals("/stockModifyAction.adm")) {
             System.out.println("[url ==> ]" + url);
-            service.stockModify(req, res);
+            service.stockModifyAction(req, res);
 
-            viewPage = "/admin/stock/stockModifyAction.jsp";
+            viewPage = "/admin/stock/stockList.jsp";
 
         // 환불관리 페이지
         } else if (url.equals("/refundList.adm")) {

@@ -15,7 +15,7 @@
 			<%@ include file="/common/jsp/nav.jsp"%>
 			<section>
 				<article class="has_side">
-					<%@ include file="/common/jsp/nav.jsp"%>
+					<%@ include file="/common/jsp/leftSideBar.jsp"%>
 					<div class="inquire_list">
 						<table>
 							<tr>
@@ -29,7 +29,7 @@
 							<tr>
 								<td>1</td>
 								<td>
-									<a href="inquire.html"> 택배 오배송으로 도착하지 않았습니다. </a>
+									<a href="inquire.gu?id="> 택배 오배송으로 도착하지 않았습니다. </a>
 								</td>
 								<td>홍길동</td>
 								<td>2021.07.12.</td>
@@ -38,21 +38,11 @@
 							</tr>
 						</table>
 					</div>
-					<div class="right_sidebar">
-						<ul>
-							<li>
-								<a href="#top"> 위로 </a>
-							</li>
-							<li>
-								<a href="#bottom"> 아래로 </a>
-							</li>
-						</ul>
-					</div>
 					<%@ include file="/common/jsp/rightSideBar.jsp"%>
 				</article>
 			</section>
-			<div id="bottom" />
 			<%@ include file="/common/jsp/footer.jsp"%>
+			<div id="bottom" />
 		</c:when>
 		<c:otherwise>
 			<script type="text/javascript">

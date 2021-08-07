@@ -51,10 +51,10 @@
         <!-- nav_search end -->
         <!-- nav_service -->
         <div class="nav_service">
-            <a href="editInfo.gu">
+            <a href="myOrder.gu">
                 <i class="fas fa-user"></i>
             </a>
-            <a href="guest/myShopping/myCart.html">
+            <a href="myCart.gu">
                 <i class="fas fa-shopping-cart"></i>
             </a>
         </div>

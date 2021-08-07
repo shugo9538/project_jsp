@@ -26,7 +26,7 @@
                         <br>
                     </c:otherwise>
                 </c:choose>
-                <li onclick="window.location='inquire.xx'">고객센터</li>
+                <li onclick="window.location='inquireList.gu'">고객센터</li>
             </ul>
         </div>
     </header>

@@ -16,7 +16,16 @@ public class ProductVO {
     private String productOrigin;
     private String productEa;
     private String productContent;
-    
+    private int starPoint;
+
+    public int getStarPoint() {
+        return starPoint;
+    }
+
+    public void setStarPoint(int starPoint) {
+        this.starPoint = starPoint;
+    }
+
     public String getProductContent() {
         return productContent;
     }
@@ -28,7 +37,7 @@ public class ProductVO {
     public String getCategoryName() {
         return categoryName;
     }
-    
+
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
@@ -60,63 +69,63 @@ public class ProductVO {
     public int getProductId() {
         return productId;
     }
-    
+
     public void setProductId(int productId) {
         this.productId = productId;
     }
-    
+
     public String getProductName() {
         return productName;
     }
-    
+
     public void setProductName(String productName) {
         this.productName = productName;
     }
-    
+
     public int getProductPrice() {
         return productPrice;
     }
-    
+
     public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
-    
+
     public int getProductArrival() {
         return productArrival;
     }
-    
+
     public void setProductArrival(int productArrival) {
         this.productArrival = productArrival;
     }
-    
+
     public int getProductStock() {
         return productStock;
     }
-    
+
     public void setProductStock(int productStock) {
         this.productStock = productStock;
     }
-    
+
     public String getProductImg() {
         return productImg;
     }
-    
+
     public void setProductImg(String productImg) {
         this.productImg = productImg;
     }
-    
+
     public Date getProductEnrollment() {
         return productEnrollment;
     }
-    
+
     public void setProductEnrollment(Date productEnrollment) {
         this.productEnrollment = productEnrollment;
     }
-    
+
     public int getCategoryId() {
         return categoryId;
     }
-    
+
     public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }

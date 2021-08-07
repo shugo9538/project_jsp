@@ -23,6 +23,11 @@
                 alert("제품 삭제 오류");
             </script>
 		</c:when>
+		<c:when test="${isError == -2}">
+			<script type="text/javascript">
+                alert("제품정보 수정 오류");
+            </script>
+		</c:when>
 		<c:otherwise>
 			<c:if test="${isOk != 1}">
 				<c:redirect url="stockList.adm" />
@@ -50,7 +55,7 @@
                         <c:forEach items="${productVO}" var="vo" varStatus="status" >
                             <tr>
                                 <td>
-                                    <input type="checkbox" name="${vo.getProductId()}" id="${vo.getProductId()}"
+                                    <input type="checkbox" name="" id="${vo.getProductId()}"
                                         value="${vo.getProductId()}"
                                     >
                                     <label for="${vo.getProductId()}">${status.count}</label>
@@ -69,7 +74,7 @@
                                 <td>
                                     <ul>
                                         <li>
-                                            <input type="button" name="modiBtn" onclick="window.location='stockModify.adm?id=${vo.getProductId()}'" value="수정">
+                                            <input type="button" name="modBtn" onclick="window.location='stockModify.adm?id=${vo.getProductId()}'" value="수정">
                                             <input type="button" name="delBtn" onclick="window.location='stockDeleteAction.adm?id=${vo.getProductId()}'" value="삭제">
                                         </li>
                                     </ul>

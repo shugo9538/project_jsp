@@ -22,7 +22,7 @@ public class AdminServiceImpl implements AdminService {
     // 로그인시 사용자 정보 확인
     @Override
     public void loginAction(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "loginAction");
+        Log.i(this.getClass().getName(), "loginAction");
 
         // 로그인 아이디, 비밀번호 획득
         String id = req.getParameter("email");
@@ -39,7 +39,7 @@ public class AdminServiceImpl implements AdminService {
     // 로그인 처리 완료
     @Override
     public void loginComplete(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "loginComplete");
+        Log.i(this.getClass().getName(), "loginComplete");
 
         // 로그인한 회원 정보 가져오기
         String id = req.getParameter("id").toString();
@@ -53,7 +53,7 @@ public class AdminServiceImpl implements AdminService {
     // 카테고리 리스트 호출
     @Override
     public void categoryList(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "categoryList");
+        Log.i(this.getClass().getName(), "categoryList");
 
         // 모든 카테고리 정보 가져오기
         ArrayList<CategoryVO> list = (ArrayList<CategoryVO>) adminDAO.categoryList();
@@ -65,7 +65,7 @@ public class AdminServiceImpl implements AdminService {
     // 카테고리 추가
     @Override
     public void categoryAdd(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "categoryAdd");
+        Log.i(this.getClass().getName(), "categoryAdd");
 
         // 카테고리 데이터 추가
         String id = req.getParameter("category_name");
@@ -78,7 +78,7 @@ public class AdminServiceImpl implements AdminService {
     // 카테고리 삭제
     @Override
     public void categoryDelete(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "categoryDelete");
+        Log.i(this.getClass().getName(), "categoryDelete");
 
         // 카테고리 데이터 삭제
         String id = req.getParameter("categoryId");
@@ -91,7 +91,7 @@ public class AdminServiceImpl implements AdminService {
     // 재고목록
     @Override
     public void stockList(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "stockList");
+        Log.i(this.getClass().getName(), "stockList");
 
         // 재고 목록 데이터
         ArrayList<ProductVO> list = (ArrayList<ProductVO>) adminDAO.productList();
@@ -114,7 +114,7 @@ public class AdminServiceImpl implements AdminService {
     // 재고 추가
     @Override
     public void stockAdd(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "stockAdd");
+        Log.i(this.getClass().getName(), "stockAdd");
         ProductVO vo = new ProductVO();
         
         vo.setProductName(req.getParameter("productName"));
@@ -136,7 +136,7 @@ public class AdminServiceImpl implements AdminService {
     // 재고삭제
     @Override
     public void stockDelete(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "stockDelete");
+        Log.i(this.getClass().getName(), "stockDelete");
         
         int id = Integer.parseInt(req.getParameter("id"));
         int isDelete = adminDAO.productDelete(id);
@@ -147,7 +147,7 @@ public class AdminServiceImpl implements AdminService {
     // 상품정보 수정
     @Override
     public void stockModify(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "stockModify");
+        Log.i(this.getClass().getName(), "stockModify");
         
         int id = Integer.parseInt(req.getParameter("id"));
         ProductVO vo = adminDAO.getProductDetail(id);
@@ -160,22 +160,36 @@ public class AdminServiceImpl implements AdminService {
     // 상품정보 수정
     @Override
     public void stockModifyAction(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "stockModifyAction");
+        Log.i(this.getClass().getName(), "stockModifyAction");
+        ProductVO vo = new ProductVO();
         
-        int id = Integer.parseInt(req.getParameter("id"));
-        ProductVO vo = adminDAO.getProductDetail(id);
+        vo.setProductId(Integer.parseInt(req.getParameter("productId")));
+        vo.setProductName(req.getParameter("productName"));
+        vo.setProductPrice(Integer.parseInt(req.getParameter("productPrice")));
+        vo.setProductStock(Integer.parseInt(req.getParameter("productStock")));
+        vo.setProductImg(req.getParameter("productImg"));
+        vo.setProductEa(req.getParameter("productEA"));
+        vo.setProductProducer(req.getParameter("productProducer"));
+        vo.setProductOrigin(req.getParameter("productOrigin"));
+        vo.setCategoryId(Integer.parseInt(req.getParameter("categoryId")));
+        vo.setProductContent(req.getParameter("productContent"));
+        vo.setCategoryName(adminDAO.getCategory(vo.getCategoryId()));
+        
+        int isModify = adminDAO.productUpdate(vo);
+        
+        req.setAttribute("isError", isModify);
     }
 
     // 환불목록
     @Override
     public void refundList(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "refundList");
+        Log.i(this.getClass().getName(), "refundList");
     }
 
     // 환불요청
     @Override
     public void refundAction(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().toString(), "refundAction");
+        Log.i(this.getClass().getName(), "refundAction");
 
     }
 

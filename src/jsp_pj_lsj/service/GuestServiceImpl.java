@@ -1,5 +1,8 @@
 package jsp_pj_lsj.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +11,8 @@ import jsp_pj_lsj.dao.AdminDAOImpl;
 import jsp_pj_lsj.dao.GuestDAO;
 import jsp_pj_lsj.dao.GuestDAOImpl;
 import jsp_pj_lsj.util.EmailChkHandler;
+import jsp_pj_lsj.vo.CategoryVO;
+import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
 import jsp_pj_lsj.util.*;
 
@@ -168,4 +173,40 @@ public class GuestServiceImpl implements GuestService {
         // 업데이트 결과
         req.setAttribute("chkPW", chkPW);
     }
+
+    // 문의하기
+    @Override
+    public void inquireAction(HttpServletRequest req, HttpServletResponse res) {
+        
+    }
+
+    // 상품목록 가져오기
+    @Override
+    public void productList(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().getName(), "productList");
+        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
+        
+        List<ProductVO> list = (ArrayList<ProductVO>) guestDAO.productList(categoryId);
+        
+        req.setAttribute("list", list);
+    }
+
+    // 상품 상세 정보 보기
+    @Override
+    public void productDetail(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().getName(), "productDetail");
+        int productId = Integer.parseInt(req.getParameter("id"));
+        ProductVO vo = guestDAO.productDetail(productId);
+        
+        req.getSession().setAttribute("ProductVO", vo);
+    }
+
+    @Override
+    public void categoryList(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().getName(), "productList");
+        List<CategoryVO> list = (ArrayList<CategoryVO>) guestDAO.categoryList();
+        
+        req.getSession().setAttribute("categoryList", list);
+    }
+    
 }

@@ -24,6 +24,11 @@ article {
   width: 1000px;
 }
 
+aside ul {
+    display: flex;
+    flex-direction: column;
+}
+
 /* 광고 */
 .adv {
   display: flex;
