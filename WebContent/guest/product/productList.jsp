@@ -39,7 +39,7 @@
 										<table>
 											<tr>
 												<th>
-													<img src="images/product_apple.jpg" alt="이미지">
+													<img src="${path}${vo.getProductImg()}" alt="이미지">
 												</th>
 											</tr>
 											<tr>

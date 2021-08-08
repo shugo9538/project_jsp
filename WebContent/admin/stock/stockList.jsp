@@ -46,6 +46,7 @@
                     <table>
                         <tr>
                             <th>번호</th>
+                            <th>이미지</th>
                             <th>재고명</th>
                             <th>재고분류</th>
                             <th>가격</th>
@@ -59,6 +60,9 @@
                                         value="${vo.getProductId()}"
                                     >
                                     <label for="${vo.getProductId()}">${status.count}</label>
+                                </td>
+                                <td>
+                                	<img src="upload/product/${vo.getProductImg()}">
                                 </td>
                                 <td>
                                     <input type="text" name="" value="${vo.getProductName()}" readonly>

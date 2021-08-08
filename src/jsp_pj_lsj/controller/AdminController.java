@@ -17,9 +17,9 @@ import jsp_pj_lsj.util.ImageUploader;
 import jsp_pj_lsj.util.Log;
 
 @WebServlet(name = "AdminController", urlPatterns = { "*.adm" })
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
+@MultipartConfig(location="D:\\Dev88\\workspace\\jsp_pj_lsj\\WebContent\\upload\\product", fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
 public class AdminController extends HttpServlet {
-    private static final String IMG_UPLOAD_DIR = "upload/product";
+    private static final String IMG_UPLOAD_DIR = "D:\\\\Dev88\\\\workspace\\\\jsp_pj_lsj\\\\WebContent\\\\upload\\\\product";
     private ImageUploader uploader;
     private static final long serialVersionUID = 1L;
     private AdminService service = new AdminServiceImpl();
@@ -100,16 +100,24 @@ public class AdminController extends HttpServlet {
             System.out.println("[url ==> ]" + url);
             service.stockList(req, res);
             req.setAttribute("isOk", 1);
+            req.setAttribute("path", getServletContext().getRealPath(""));
 
             viewPage = "/admin/stock/stockList.jsp";
 
             // 재고 추가 페이지
         } else if (url.equals("/stockAddAction.adm")) {
             Log.i("url", url);
-            uploader = new ImageUploader();
-            uploader.setUploadPath(getServletContext().getRealPath("") + File.separator + IMG_UPLOAD_DIR);
-            uploader.imageUpload(req, res);
+            String contentType = req.getContentType();
+            if (contentType != null && contentType.toLowerCase().startsWith("multipart/")) {
+                uploader = new ImageUploader();
+                uploader.setUploadPath(IMG_UPLOAD_DIR);
+                Log.i("url", IMG_UPLOAD_DIR);
+                uploader.imageUpload(req, res);
+            }
+            
             service.stockAdd(req, res);
+            
+            req.setAttribute("path", getServletContext().getRealPath(""));
 
             viewPage = "/admin/stock/stockList.jsp";
 
