@@ -22,7 +22,7 @@
 			<h4>MY 정보</h4>
 			<ul>
 				<li onclick="window.location='editInfo.gu'">개인정보확인/수정</li>
-				<li onclick="window.location='shippingAddress.gu'">배송지 관리</li>
+				<li onclick="window.location='arrivalAddr.gu'">배송지 관리</li>
 			</ul>
 		</li>
 	</ul>

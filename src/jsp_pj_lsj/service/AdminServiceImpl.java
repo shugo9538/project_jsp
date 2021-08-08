@@ -96,7 +96,7 @@ public class AdminServiceImpl implements AdminService {
         // 재고 목록 데이터
         ArrayList<ProductVO> list = (ArrayList<ProductVO>) adminDAO.productList();
         ArrayList<CategoryVO> category = (ArrayList<CategoryVO>) adminDAO.categoryList();
-        
+
         for (ProductVO vo : list) {
             for (CategoryVO name : category) {
                 if (vo.getCategoryId() == name.getCategoryId()) {
@@ -116,20 +116,21 @@ public class AdminServiceImpl implements AdminService {
     public void stockAdd(HttpServletRequest req, HttpServletResponse res) {
         Log.i(this.getClass().getName(), "stockAdd");
         ProductVO vo = new ProductVO();
-        
+        res.setContentType("image/jpeg");
+
         vo.setProductName(req.getParameter("productName"));
         vo.setProductPrice(Integer.parseInt(req.getParameter("productPrice")));
         vo.setProductStock(Integer.parseInt(req.getParameter("productStock")));
-        vo.setProductImg(req.getParameter("productImg"));
+        vo.setProductImg((String) req.getAttribute("fileName"));
         vo.setProductEa(req.getParameter("productEA"));
         vo.setProductProducer(req.getParameter("productProducer"));
         vo.setProductOrigin(req.getParameter("productOrigin"));
         vo.setCategoryId(Integer.parseInt(req.getParameter("categoryId")));
         vo.setProductContent(req.getParameter("productContent"));
         vo.setCategoryName(adminDAO.getCategory(vo.getCategoryId()));
-        
+
         int isInsert = adminDAO.productAdd(vo);
-        
+
         req.setAttribute("isError", isInsert);
     }
 
@@ -137,10 +138,10 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void stockDelete(HttpServletRequest req, HttpServletResponse res) {
         Log.i(this.getClass().getName(), "stockDelete");
-        
+
         int id = Integer.parseInt(req.getParameter("id"));
         int isDelete = adminDAO.productDelete(id);
-        
+
         req.setAttribute("isError", isDelete);
     }
 
@@ -148,21 +149,21 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void stockModify(HttpServletRequest req, HttpServletResponse res) {
         Log.i(this.getClass().getName(), "stockModify");
-        
+
         int id = Integer.parseInt(req.getParameter("id"));
         ProductVO vo = adminDAO.getProductDetail(id);
         ArrayList<CategoryVO> category = (ArrayList<CategoryVO>) adminDAO.categoryList();
-        
+
         req.setAttribute("vo", vo);
         req.setAttribute("categoryVO", category);
     }
-    
+
     // 상품정보 수정
     @Override
     public void stockModifyAction(HttpServletRequest req, HttpServletResponse res) {
         Log.i(this.getClass().getName(), "stockModifyAction");
         ProductVO vo = new ProductVO();
-        
+
         vo.setProductId(Integer.parseInt(req.getParameter("productId")));
         vo.setProductName(req.getParameter("productName"));
         vo.setProductPrice(Integer.parseInt(req.getParameter("productPrice")));
@@ -174,9 +175,9 @@ public class AdminServiceImpl implements AdminService {
         vo.setCategoryId(Integer.parseInt(req.getParameter("categoryId")));
         vo.setProductContent(req.getParameter("productContent"));
         vo.setCategoryName(adminDAO.getCategory(vo.getCategoryId()));
-        
+
         int isModify = adminDAO.productUpdate(vo);
-        
+
         req.setAttribute("isError", isModify);
     }
 

@@ -11,6 +11,7 @@ import jsp_pj_lsj.dao.AdminDAOImpl;
 import jsp_pj_lsj.dao.GuestDAO;
 import jsp_pj_lsj.dao.GuestDAOImpl;
 import jsp_pj_lsj.util.EmailChkHandler;
+import jsp_pj_lsj.vo.ArrivalVO;
 import jsp_pj_lsj.vo.CategoryVO;
 import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
@@ -180,6 +181,13 @@ public class GuestServiceImpl implements GuestService {
         
     }
 
+    // 문의 수정/삭제 페이지
+    @Override
+    public void inquireModify(HttpServletRequest req, HttpServletResponse res) {
+        // TODO Auto-generated method stub
+        
+    }
+
     // 상품목록 가져오기
     @Override
     public void productList(HttpServletRequest req, HttpServletResponse res) {
@@ -208,5 +216,22 @@ public class GuestServiceImpl implements GuestService {
         
         req.getSession().setAttribute("categoryList", list);
     }
-    
+
+    // 
+    @Override
+    public void addArrivalAddr(HttpServletRequest req, HttpServletResponse res) {
+        Log.i(this.getClass().getName(), "addArrivalAddr");
+        ArrivalVO vo = new ArrivalVO();
+        vo.setArrivalAddr(req.getParameter("arrival_address"));
+        UserVO user = (UserVO) req.getSession().getAttribute("vo");
+        vo.setReceiverTel(req.getParameter("arrival_phone"));
+        vo.setReceiverComment(req.getParameter("arrival_comment"));
+        vo.setUserID(user.getEmail());
+        vo.setReceiverName(req.getParameter("userName"));
+        
+        int isInsert = guestDAO.addArrivalAddr(vo);
+        
+        req.setAttribute("isInsert", isInsert);
+        req.setAttribute("nextPage", "arrivalAddr.gu");
+    }
 }

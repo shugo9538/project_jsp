@@ -29,7 +29,7 @@
 							<tr>
 								<td>1</td>
 								<td>
-									<a href="inquire.gu?id="> 택배 오배송으로 도착하지 않았습니다. </a>
+									<a href="inquireModify.gu?id="> 택배 오배송으로 도착하지 않았습니다. </a>
 								</td>
 								<td>홍길동</td>
 								<td>2021.07.12.</td>

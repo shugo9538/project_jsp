@@ -58,6 +58,8 @@
 						<div class="sub_menu">
 							<div>
 								<input type="button" onclick="window.location='inquireList.gu'" value="목록">
+								<input type="button" onclick="window.location='qnaModify.gu'" value="수정">
+								<input type="button" onclick="window.location='qnaDelete.gu'" value="삭제">
 							</div>
 						</div>
 					</div>

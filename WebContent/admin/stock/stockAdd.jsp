@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form class="" action="stockAddAction.adm" method="post">
+<form action="stockAddAction.adm" method="post" enctype="multipart/form-data">
 	<legend>상품 추가</legend>
 	<fieldset>
 		<table>
@@ -37,7 +37,7 @@
 				<td>IMG</td>
 				<td>
 					<label for="upload_img"></label>
-					<input type="file" id="upload_img" name="productImg" value="" accept="image/*">
+					<input type="file" id="upload_img" name="productImg" multiple="multiple"/>
 				</td>
 			</tr>
 			<tr>

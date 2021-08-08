@@ -2,6 +2,7 @@ package jsp_pj_lsj.dao;
 
 import java.util.List;
 
+import jsp_pj_lsj.vo.ArrivalVO;
 import jsp_pj_lsj.vo.CategoryVO;
 import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.QnaVO;
@@ -44,4 +45,7 @@ public interface GuestDAO {
     
     // 상품 정보 화면
     public List<CategoryVO> categoryList();
+    
+    // 상품 정보 화면
+    public int addArrivalAddr(ArrivalVO vo);
 }

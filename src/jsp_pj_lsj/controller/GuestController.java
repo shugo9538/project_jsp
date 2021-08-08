@@ -1,8 +1,6 @@
 package jsp_pj_lsj.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jsp_pj_lsj.service.GuestServiceImpl;
-import jsp_pj_lsj.vo.CategoryVO;
 
 @WebServlet("*.gu")
 public class GuestController extends HttpServlet {
@@ -176,6 +173,13 @@ public class GuestController extends HttpServlet {
 
             viewPage = "/guest/activity/inquireList.jsp";
 
+            // 문의 내용 수정/삭제 페이지
+        } else if (url.equals("/inquireModify.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.inquireModify(req, res);
+
+            viewPage = "/guest/activity/inquireModify.jsp";
+
             // QNA 추가
         } else if (url.equals("/inquireAction.gu")) {
             System.out.println("[url ==> ]" + url);
@@ -196,10 +200,17 @@ public class GuestController extends HttpServlet {
             viewPage = "/guest/activity/wishList.jsp";
 
             // 배송지 관리
-        } else if (url.equals("/shippingAddress.gu")) {
+        } else if (url.equals("/arrivalAddr.gu")) {
             System.out.println("[url ==> ]" + url);
 
-            viewPage = "/guest/account/page/shippingAddress.jsp";
+            viewPage = "/guest/account/page/arrivalAddr.jsp";
+
+            // 배송지 추가
+        } else if (url.equals("/arrivalAddrAddAction.gu")) {
+            System.out.println("[url ==> ]" + url);
+            service.addArrivalAddr(req, res);
+
+            viewPage = "/guest/action/insertAction.jsp";
 
             // 장바구니 목록
         } else if (url.equals("/myCart.gu")) {

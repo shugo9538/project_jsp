@@ -32,6 +32,9 @@ public interface GuestService {
     // 문의하기
     public void inquireAction(HttpServletRequest req, HttpServletResponse res);
     
+    // 문의하기
+    public void inquireModify(HttpServletRequest req, HttpServletResponse res);
+    
     // 상품 목록 가져오기
     public void productList(HttpServletRequest req, HttpServletResponse res);
     
@@ -40,4 +43,7 @@ public interface GuestService {
    
     // 카테고리 목록 가져오기
     public void categoryList(HttpServletRequest req, HttpServletResponse res);
+    
+    // 배송지 추가하기
+    public void addArrivalAddr(HttpServletRequest req, HttpServletResponse res);
 }

@@ -38,6 +38,7 @@
 								<th>상품금액</th>
 								<th>배송비</th>
 							</tr>
+							
 							<!-- content -->
 							<tr>
 								<td rowspan="2">

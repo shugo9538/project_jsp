@@ -6,7 +6,7 @@ public class ArrivalVO {
     private String receiverTel;
     private String receiverComment;
     private String arrivalAddr;
-    private int userID;
+    private String userID;
     
     public int getArrivalID() {
         return arrivalID;
@@ -38,10 +38,10 @@ public class ArrivalVO {
     public void setArrivalAddr(String arrivalAddr) {
         this.arrivalAddr = arrivalAddr;
     }
-    public int getUserID() {
+    public String getUserID() {
         return userID;
     }
-    public void setUserID(int userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
     

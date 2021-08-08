@@ -21,6 +21,7 @@ import javax.sql.DataSource;
 
 import jsp_pj_lsj.util.Log;
 import jsp_pj_lsj.util.SettingsValue;
+import jsp_pj_lsj.vo.ArrivalVO;
 import jsp_pj_lsj.vo.CategoryVO;
 import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.QnaVO;
@@ -483,6 +484,30 @@ public enum GuestDAOImpl implements GuestDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public int addArrivalAddr(ArrivalVO vo) {
+        Log.i(this.getClass().toString(), "insertGuest");
+        int isInsert = 0;
+
+        String query = "INSERT INTO arrival_addr(arrival_id, receiver_id, receiver_name, receiver_phone, receiver_comment, arrival_address)"
+                + " VALUES(arrival_seq.nextval, ?, ?, ?, ?, ?)";
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(query);) {
+            pstmt.setString(1, vo.getUserID());
+            pstmt.setString(2, vo.getReceiverName());
+            pstmt.setString(3, vo.getReceiverTel());
+            pstmt.setString(4, vo.getReceiverComment());
+            pstmt.setString(5, vo.getArrivalAddr());
+            
+            isInsert = pstmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return isInsert;
     }
     
 }
