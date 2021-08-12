@@ -17,7 +17,7 @@
 			<div class="has_side">
 				<%@ include file="/admin/common/jsp/leftSideBar.jsp"%>
 				<div class="inquire">
-					<form class="" action="stockModifyAction.adm" method="post">
+					<form action="stockModifyAction.pr" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="productId" value="${vo.getProductId()}">
 						<legend>상품 수정</legend>
 						<fieldset>

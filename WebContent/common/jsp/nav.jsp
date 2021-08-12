@@ -15,25 +15,25 @@
                 <i class="fas fa-bars"> </i>
                 카테고리
             </li>
-            <li>
-                <ul>
-                    <li>
-                        <a href="guest/product/productList.html">과일</a>
-                    </li>
-                    <li>
-                        <a href="#">야채</a>
-                    </li>
-                    <li>
-                        <a href="#">육류</a>
-                    </li>
-                    <li>
-                        <a href="#">유제품</a>
-                    </li>
-                    <li>
-                        <a href="#">음료</a>
-                    </li>
-                </ul>
-            </li>
+<!--             <li> -->
+<!--                 <ul> -->
+<!--                     <li> -->
+<!--                         <a href="guest/product/productList.html">과일</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="#">야채</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="#">육류</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="#">유제품</a> -->
+<!--                     </li> -->
+<!--                     <li> -->
+<!--                         <a href="#">음료</a> -->
+<!--                     </li> -->
+<!--                 </ul> -->
+<!--             </li> -->
         </ul>
         <!-- nav_category end -->
         <!-- nav_logo -->

@@ -8,31 +8,8 @@ public interface AdminService {
     public void loginAction(HttpServletRequest req, HttpServletResponse res);
     
     // 로그인 성공
-    public void loginComplete(HttpServletRequest req, HttpServletResponse res);
+    public void makeSession(HttpServletRequest req, HttpServletResponse res);
     
-    // 카테고리 가져오기
-    public void categoryList(HttpServletRequest req, HttpServletResponse res);
-
-    // 카테고리 추가
-    public void categoryAdd(HttpServletRequest req, HttpServletResponse res);
-    
-    // 카테고리 삭제
-    public void categoryDelete(HttpServletRequest req, HttpServletResponse res);
-    
-    // 재고목록
-    public void stockList(HttpServletRequest req, HttpServletResponse res);
-    
-    // 재고추가
-    public void stockAdd(HttpServletRequest req, HttpServletResponse res);
-    
-    // 재고삭제
-    public void stockDelete(HttpServletRequest req, HttpServletResponse res);
-    
-    // 재고 수정
-    public void stockModify(HttpServletRequest req, HttpServletResponse res);
-    
-    // 재고 수정 처리
-    public void stockModifyAction(HttpServletRequest req, HttpServletResponse res);
     
     // 환불목록
     public void refundList(HttpServletRequest req, HttpServletResponse res);

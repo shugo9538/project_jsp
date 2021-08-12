@@ -7,43 +7,62 @@ public class ArrivalVO {
     private String receiverComment;
     private String arrivalAddr;
     private String userID;
-    
+    private int isDefault;
+
+    public int getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(int isDefault) {
+        this.isDefault = isDefault;
+    }
+
     public int getArrivalID() {
         return arrivalID;
     }
+
     public void setArrivalID(int arrivalID) {
         this.arrivalID = arrivalID;
     }
+
     public String getReceiverName() {
         return receiverName;
     }
+
     public void setReceiverName(String receiverName) {
         this.receiverName = receiverName;
     }
+
     public String getReceiverTel() {
         return receiverTel;
     }
+
     public void setReceiverTel(String receiverTel) {
         this.receiverTel = receiverTel;
     }
+
     public String getReceiverComment() {
         return receiverComment;
     }
+
     public void setReceiverComment(String receiverComment) {
         this.receiverComment = receiverComment;
     }
+
     public String getArrivalAddr() {
         return arrivalAddr;
     }
+
     public void setArrivalAddr(String arrivalAddr) {
         this.arrivalAddr = arrivalAddr;
     }
+
     public String getUserID() {
         return userID;
     }
+
     public void setUserID(String userID) {
         this.userID = userID;
     }
-    
-    
+
 }

@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/jsp/settings.jsp"%>
-<%@ page import="jsp_pj_lsj.vo.UserVO"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/guest/account/page/styleSettings.jsp"%>
+<%@ include file="/guest/account/styleSettings.jsp"%>
 </head>
 <body onload="checkAlert();">
 	<%@ include file="/common/jsp/header.jsp"%>
@@ -18,19 +17,12 @@
 					<table>
 						<tr>
 							<td>
-								<ul class="small_list">
-									<li>
-										<img src="../../common/img/apple1.png" alt="이미지">
-									</li>
-								</ul>
-							</td>
-							<td>
-								<img src="images/product_apple.jpg" alt="이미지">
+								<img src="upload/product/${ProductVO.productImg}" alt="이미지" width="100%" height="100%">
 							</td>
 							<td>
 								<table class="">
 									<tr>
-										<td colspan="2">${vo.getProductName()}</td>
+										<td colspan="2">${ProductVO.productName}</td>
 										<td rowspan="2">
 											<ul class="good_share">
 												<li>
@@ -54,29 +46,20 @@
 										<td>상품평</td>
 									</tr>
 									<tr>
-										<td colspan="4">${vo.getProductPrice()}</td>
+										<td colspan="4">${ProductVO.getProductPrice()}</td>
 									</tr>
 									<tr>
-										<td colspan="4">
-											내일(일) 7/11 새벽 7시 전 도착 보장
-											<br>
-											<br>
-											<br>
-											<br>
-											<br>
-											<br>
-											<br>
-										</td>
+										<td colspan="4">내일(일) 7/11 새벽 7시 전 도착 보장</td>
 									</tr>
 									<tr>
 										<td>
-											<input type="number" id="" min="1">
+											<input type="number" id="orderCnt" min="1">
 										</td>
 										<td>
 											<input type="button" name="" value="장바구니">
 										</td>
 										<td>
-											<input type="button" name="" value="바로구매">
+											<input type="button" name="" value="바로구매" onclick="order(${ProductVO.productId}, orderCnt.value)">
 										</td>
 									</tr>
 								</table>
@@ -107,21 +90,21 @@
 							<td>품목명</td>
 							<td>사과</td>
 							<td>단위</td>
-							<td>${vo.getProductEa()}</td>
+							<td>${ProductVO.getProductEa()}</td>
 						</tr>
 						<tr>
 							<td>생산자(수입자)</td>
-							<td>${vo.getProductProducer()}</td>
+							<td>${ProductVO.getProductProducer()}</td>
 							<td>원산지</td>
-							<td>${vo.getProductOrigin()}</td>
+							<td>${ProductVO.getProductOrigin()}</td>
 						</tr>
 					</table>
 					<div class="">
-						<pre>${vo.getProductContent()}</pre>
+						<pre>${ProductVO.getProductContent()}</pre>
 					</div>
 					<hr>
 					<div id="evaluations"></div>
-					<div class="titleline" >
+					<div class="titleline">
 						<h3>상품평</h3>
 					</div>
 					<div class="small_play_list">
@@ -145,7 +128,6 @@
 							</select>
 						</div>
 					</div>
-					
 					<div class="review_list">
 						<table>
 							<tr>
@@ -215,7 +197,7 @@
 						</table>
 					</div>
 					<br>
-					<div  id="product_inquire"></div>
+					<div id="product_inquire"></div>
 					<div class="product_inquire">
 						<div class="titleline">
 							<h3>상품문의</h3>

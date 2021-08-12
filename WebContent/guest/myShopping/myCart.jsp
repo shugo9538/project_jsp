@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/guest/account/page/styleSettings.jsp"%>
+<%@ include file="/guest/account/styleSettings.jsp"%>
 </head>
 <body onload="checkAlert();">
 	<c:choose>

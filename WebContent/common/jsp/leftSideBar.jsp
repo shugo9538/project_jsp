@@ -12,8 +12,8 @@
 		<li>
 			<h4>MY 활동</h4>
 			<ul>
-				<li onclick="window.location='inquire.gu'">문의하기</li>
-				<li onclick="window.location='inquireList.gu'">문의내역 확인</li>
+				<li onclick="window.location='inquire.qa'">문의하기</li>
+				<li onclick="window.location='inquireList.qa'">문의내역 확인</li>
 				<li onclick="window.location='review.gu'">리뷰관리</li>
 				<li onclick="window.location='wishList.gu'">찜 리스트</li>
 			</ul>

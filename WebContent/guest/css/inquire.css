@@ -3,6 +3,8 @@
 .inquire_list {
   width: 800px;
   text-align: -webkit-center;
+  margin-left: 50px;
+  margin-right: 50px;
 }
 
 .inquire_list td {

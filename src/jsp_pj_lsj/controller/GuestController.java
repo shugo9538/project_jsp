@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jsp_pj_lsj.service.GuestServiceImpl;
+import jsp_pj_lsj.service.ProductService;
+import jsp_pj_lsj.service.ProductServiceImpl;
+import jsp_pj_lsj.util.Log;
 
 @WebServlet("*.gu")
 public class GuestController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final static String INDEX_PAGE_URL = "index.gu";
     private GuestServiceImpl service = new GuestServiceImpl();
+    private ProductService prService = new ProductServiceImpl();
 
     // action 실행
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -37,216 +41,194 @@ public class GuestController extends HttpServlet {
         String contextPath = req.getContextPath();
         String url = uri.substring(contextPath.length());
 
+        /*******************************************
+         *************** 사용자 정보 처리****************
+         ******************************************/
         // 인덱스 페이지로 이동
         if (url.equals("/index.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.categoryList(req, res);
+            Log.i("url", url);
+            prService.categoryListAll(req, res);
 
             viewPage = "/index.jsp";
 
             // 회원가입 페이지 이동
         } else if (url.equals("/signIn.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
-            viewPage = "/guest/account/page/signIn.jsp";
+            viewPage = "/guest/account/signIn.jsp";
 
             // 회원가입 처리
         } else if (url.equals("/signInAction.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
             service.signInAction(req, res);
+            String redirectURL = "login.gu";
 
-            viewPage = "/guest/account/action/signInAction.jsp";
-
-            // 회원가입 완료 후 이동
-        } else if (url.equals("/signInComplete.gu")) {
-            System.out.println("[url ==> ]" + url);
-
-            viewPage = INDEX_PAGE_URL;
+            req.setAttribute("redirectURL", redirectURL);
+            viewPage = "/action/insertAction.jsp";
 
             // 이메일 인증
         } else if (url.equals("/emailChk.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.emailChkAction(req, res);
+            Log.i("url", url);
+            service.checkIDAction(req, res);
 
             viewPage = INDEX_PAGE_URL;
 
             // 로그인 페이지로 이동
         } else if (url.equals("/login.gu")) {
-            System.out.println("[url ==> ]" + url);
-
-            viewPage = "/guest/account/page/login.jsp";
+            Log.i("url", url);
+            viewPage = "/guest/account/login.jsp";
 
             // 로그인 처리
         } else if (url.equals("/loginAction.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
             service.loginAction(req, res);
+            String redirectURL = "makeSession.gu";
+            
+            req.setAttribute("redirectURL", redirectURL);
 
-            viewPage = "/guest/account/action/loginAction.jsp";
+            viewPage = "/action/loginAction.jsp";
 
             // 로그인 완료 후 세션 적용과 이동
-        } else if (url.equals("/loginComplete.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.loginComplete(req, res);
+        } else if (url.equals("/makeSession.gu")) {
+            Log.i("url", url);
+            service.makeSession(req, res);
 
             viewPage = INDEX_PAGE_URL;
 
             // 로그아웃
         } else if (url.equals("/logout.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
             req.getSession().invalidate();
 
             viewPage = INDEX_PAGE_URL;
 
             // 회원정보 수정
         } else if (url.equals("/editInfo.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
-            viewPage = "/guest/account/page/editInfo.jsp";
+            viewPage = "/guest/account/editInfo.jsp";
 
             // 회원정보 수정 처리
         } else if (url.equals("/editInfoAction.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.editAction(req, res);
+            Log.i("url", url);
+            service.modifyAction(req, res);
+            String redirectURL = "editInfo.gu";
 
-            viewPage = "/guest/account/action/editInfoAction.jsp";
-
-            // 회원정보 완료 후 수정화면으로 다시 이동
-        } else if (url.equals("/editInfoComplete.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.editComplete(req, res);
-
-            viewPage = "/guest/account/page/editInfo.jsp";
+            req.setAttribute("redirectURL", redirectURL);
+            viewPage = "/action/updateAction.jsp";
 
             // 이름수정화면
         } else if (url.equals("/editName.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/account/page/editName.jsp";
 
             // 회원 탈퇴 화면
         } else if (url.equals("/withdrawal.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
-            viewPage = "/guest/account/page/withdrawal.jsp";
+            viewPage = "/guest/account/withdrawal.jsp";
 
             // 회원탈퇴 전 마지막 비밀번호 확인
         } else if (url.equals("/withdrawalAction.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.confirmPw(req, res);
+            Log.i("url", url);
+            service.checkPW(req, res);
+            String redirectURL = "withdrawalSurvey.gu";
 
-            viewPage = "/guest/account/action/withdrawalAction.jsp";
+            req.setAttribute("redirectURL", redirectURL);
+            viewPage = "/action/checkAction.jsp";
 
             // 회원탈퇴 전 설문조사
         } else if (url.equals("/withdrawalSurvey.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
-            viewPage = "/guest/account/page/withdrawalSurvey.jsp";
+            viewPage = "/guest/account/withdrawalSurvey.jsp";
 
             // 탈퇴 후 메인 화면으로 이동
-        } else if (url.equals("/withdrawalComplete.gu")) {
-            System.out.println("[url ==> ]" + url);
+        } else if (url.equals("/deleteUserAction.gu")) {
+            Log.i("url", url);
             service.deleteAction(req, res);
+            String redirectURL = INDEX_PAGE_URL;
 
-            viewPage = INDEX_PAGE_URL;
+            req.setAttribute("redirectURL", redirectURL);
 
+            viewPage = "/action/deleteAction.jsp";
+
+            /*******************************************
+             ***************사용자 정보 처리****************
+             ******************************************/
             // 내 주문목록
         } else if (url.equals("/myOrder.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/myShopping/myOrder.jsp";
 
             // 환불 요청 목록
         } else if (url.equals("/myRefund.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/myShopping/myRefund.jsp";
 
-            // 문의하기 페이지
-        } else if (url.equals("/inquire.gu")) {
-            System.out.println("[url ==> ]" + url);
-
-            viewPage = "/guest/activity/inquire.jsp";
-
-            // 문의 내역(목록 확인)
-        } else if (url.equals("/inquireList.gu")) {
-            System.out.println("[url ==> ]" + url);
-
-            viewPage = "/guest/activity/inquireList.jsp";
-
-            // 문의 내용 수정/삭제 페이지
-        } else if (url.equals("/inquireModify.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.inquireModify(req, res);
-
-            viewPage = "/guest/activity/inquireModify.jsp";
-
-            // QNA 추가
-        } else if (url.equals("/inquireAction.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.inquireAction(req, res);
-
-            viewPage = "/guest/activity/inquireList.jsp";
-
             // 리뷰관리 페이지
         } else if (url.equals("/review.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/activity/review.jsp";
 
             // 찜 목록
         } else if (url.equals("/wishList.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/activity/wishList.jsp";
 
             // 배송지 관리
         } else if (url.equals("/arrivalAddr.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/account/page/arrivalAddr.jsp";
 
             // 배송지 추가
         } else if (url.equals("/arrivalAddrAddAction.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
             service.addArrivalAddr(req, res);
 
             viewPage = "/guest/action/insertAction.jsp";
 
             // 장바구니 목록
         } else if (url.equals("/myCart.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/myShopping/myCart.jsp";
 
             // 주문 요청
         } else if (url.equals("/order.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/order/order.jsp";
 
             // 환불 요청 목록
         } else if (url.equals("/orderConfirm.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/order/orderConfirm.jsp";
 
             // 환불 요청 목록
         } else if (url.equals("/myCart.gu")) {
-            System.out.println("[url ==> ]" + url);
+            Log.i("url", url);
 
             viewPage = "/guest/myShopping/myCart.jsp";
 
             // 상품목록화면
         } else if (url.equals("/productList.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.productList(req, res);
+            Log.i("url", url);
+            prService.productList(req, res);
 
             viewPage = "/guest/product/productList.jsp";
 
             // 상품 상세 정보
-        }  else if (url.equals("/productDetail.gu")) {
-            System.out.println("[url ==> ]" + url);
-            service.productDetail(req, res);
+        } else if (url.equals("/productDetail.gu")) {
+            Log.i("url", url);
+            prService.productDetail(req, res);
 
             viewPage = "/guest/product/productInfo.jsp";
 

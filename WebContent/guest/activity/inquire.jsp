@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/guest/account/page/styleSettings.jsp"%>
+<%@ include file="/guest/account/styleSettings.jsp"%>
 </head>
 <body onload="checkAlert();">
 	<c:choose>
@@ -17,8 +17,9 @@
 				<article class="has_side">
 					<%@ include file="/common/jsp/leftSideBar.jsp"%>
 					<div class="inquire">
-						<form action="inquireAction.gu" method="post" enctype="multipart/form-data">
+						<form action="inquireAction.qa" method="post" enctype="multipart/form-data">
 							<input type="hidden" name="userId" value="${vo.getEmail()}">
+							<input type="hidden" name="productId" value="${param.productId}">
 							<table>
 								<tr>
 									<th colspan="4">
@@ -28,24 +29,19 @@
 								<tr>
 									<td>작성자 :</td>
 									<td>
-										<input type="text" value="${vo.getName()}">
+										<input type="text" name="userName" value="${vo.getName()}">
 									</td>
 									<td>작성일 :</td>
 									<td>오늘</td>
 								</tr>
 								<tr>
 									<td colspan="4">
-										<input type="file" name="qnaImg1">
+										<input type="file" name="qnaImg">
 									</td>
 								</tr>
 								<tr>
 									<td colspan="4">
-										<input type="file" name="qnaImg1">
-									</td>
-								</tr>
-								<tr>
-									<td colspan="4">
-										<textarea rows="5" cols="30" namen="qnaComment"></textarea>
+										<textarea rows="5" cols="30" name="qnaComment"></textarea>
 									</td>
 								</tr>
 								<tr>

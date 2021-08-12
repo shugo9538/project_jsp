@@ -19,14 +19,36 @@
 				<div class="inquire">
 					<table border="1px">
 						<tr>
-							<th>총 판매액</th>
-							<td>12,000원</td>
+							<th>게시번호</th>
+							<th>상품명</th>
+							<th>닉네임</th>
+							<th>후기 이미지</th>
+							<th>후기</th>
+							<th>리뷰날짜</th>
+							<th>점수</th>
 						</tr>
-						<tr>
-							<td colspan="2">
-								<img alt="" src="../../common/img/다운로드.png">
-							</td>
-						</tr>
+						<c:if test="${list != null}">
+							<c:forEach items="${list}" var="reviewVO">
+								<tr>
+									<td>${reviewVO.review_id}</td>
+									<td>${reviewVO.product_name}</td>
+									<td>${reviewVO.user_name}</td>
+									<td>
+										<img src="upload/review/${reviewVO.review_img}" />
+									</td>
+									<td>${reviewVO.review_comment}</td>
+									<td>${reviewVO.review_enrollment}</td>
+									<td>${reviewVO.star_point}</td>
+								</tr>
+							</c:forEach>
+						</c:if>
+						<c:if test="${list == null}">
+							<tr>
+								<th>
+									<h2>리뷰가 존재하지 않습니다.</h2>
+								</th>
+							</tr>
+						</c:if>
 					</table>
 				</div>
 				<%@ include file="/admin/common/jsp/rightSideBar.jsp"%>

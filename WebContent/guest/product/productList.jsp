@@ -6,15 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/guest/account/page/styleSettings.jsp"%>
+<%@ include file="/guest/account/styleSettings.jsp"%>
 </head>
 <body onload="checkAlert();">
+	<%@ include file="/common/jsp/header.jsp"%>
+	<%@ include file="/common/jsp/nav.jsp"%>
 	<section>
 		<article class="has_side">
 			<%@ include file="/common/jsp/categoryList.jsp"%>
 			<div class="main_text">
 				<div class="small_list">
-					<c:set var="category_id" value="${categoryId}"></c:set>
+					<c:set var="category_id" value="${param.categoryId}"></c:set>
 					<c:forEach items="${sessionScope.categoryList}" var="vo">
 						<c:if test="${vo.getCategoryId() == category_id}">
 							<h3>식품 > ${vo.getCategoryName()}</h3>
@@ -35,11 +37,11 @@
 						<c:forEach items="${list}" var="vo">
 							<tr>
 								<td>
-									<a href="productDetail.gu?id=${vo.getProductId()}">
+									<a href="productDetail.pr?id=${vo.getProductId()}">
 										<table>
 											<tr>
 												<th>
-													<img src="${path}${vo.getProductImg()}" alt="이미지">
+													<img src="upload/product/${vo.getProductImg()}" width="100px" height="100px" 이미지">
 												</th>
 											</tr>
 											<tr>
@@ -76,6 +78,32 @@
 						</tr>
 					</c:if>
 				</table>
+				<table align="center">
+						<tr>
+							<th align="center">
+								<c:if test="${cnt > 0}">
+									<c:if test="${startPage > pageBlock}">
+										<a href="productList.pr&categoryId=${category_id}">[◀◀ ]</a>
+										<a href="productList.pr?pageNum=${startPage - pageBlock}&categoryId=${category_id}">[◀ ]</a>
+									</c:if>
+									<c:forEach var="i" begin="${startPage}" end="${endPage}">
+										<c:if test="${i == currentPage}">
+											<span>
+												<b>[${i}]</b>
+											</span>
+										</c:if>
+										<c:if test="${i != currentPage}">
+											<a href="productList.pr?pageNum=${i}&categoryId=${category_id}">[${i}]</a>
+										</c:if>
+									</c:forEach>
+									<c:if test="${pageCnt > endPage}">
+										<a href="productList.pr?pageNum=${startPage + pageBlock}&categoryId=${category_id}">[▶ ]</a>
+										<a href="productList.pr?pageNum=${pageCnt}&categoryId=${category_id}">[▶▶ ]</a>
+									</c:if>
+								</c:if>
+							</th>
+						</tr>
+					</table>
 			</div>
 			<%@ include file="/common/jsp/rightSideBar.jsp"%>
 		</article>

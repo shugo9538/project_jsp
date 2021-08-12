@@ -1,26 +1,18 @@
 package jsp_pj_lsj.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jsp_pj_lsj.dao.AdminDAO;
-import jsp_pj_lsj.dao.AdminDAOImpl;
-import jsp_pj_lsj.dao.GuestDAO;
-import jsp_pj_lsj.dao.GuestDAOImpl;
+import jsp_pj_lsj.dao.UserDAO;
+import jsp_pj_lsj.dao.UserDAOImpl;
 import jsp_pj_lsj.util.EmailChkHandler;
 import jsp_pj_lsj.vo.ArrivalVO;
-import jsp_pj_lsj.vo.CategoryVO;
-import jsp_pj_lsj.vo.ProductVO;
 import jsp_pj_lsj.vo.UserVO;
 import jsp_pj_lsj.util.*;
 
 
 public class GuestServiceImpl implements GuestService {
-    private GuestDAO guestDAO = GuestDAOImpl.INSTANCE;
-    private AdminDAO adminDAO = AdminDAOImpl.INSTANCE;
+    private UserDAO userDAO = UserDAOImpl.INSTANCE;
     private UserVO vo = null;
     
     // 회원가입 처리
@@ -39,15 +31,15 @@ public class GuestServiceImpl implements GuestService {
         vo.setEmailChk(key);
         
         // 회원가입 요청
-        int isInsert = guestDAO.insertGuest(vo);
+        int isInsert = userDAO.insertUser(vo);
         
         // 실패 시 중복정보인지 확인
         boolean isExists = true;
         if (isInsert == 0) {
-            isExists = guestDAO.idCheck(vo.getEmail());
+            isExists = userDAO.checkID(vo.getEmail());
         }
         if (!isExists) isInsert = 2;
-        else guestDAO.sendmail(email, key);
+        else EmailChkHandler.sendmail(email, key);
         
         // 회원가입 결과
         req.setAttribute("isInsert", isInsert);
@@ -55,14 +47,14 @@ public class GuestServiceImpl implements GuestService {
 
     // 이메일 인증
     @Override
-    public void emailChkAction(HttpServletRequest req, HttpServletResponse res) {
+    public void checkIDAction(HttpServletRequest req, HttpServletResponse res) {
         Log.i("SERVICE", this.toString());
         
         // 사용자 입력정보 획득
         String key = req.getParameter("key");
         
         // 이메일 인증 확인
-        int isAuth = guestDAO.emailChk(key);
+        int isAuth = userDAO.emailCheck(key);
         
         // 회원가입 결과
         req.setAttribute("isAuth", isAuth);
@@ -78,22 +70,24 @@ public class GuestServiceImpl implements GuestService {
         String pw = req.getParameter("pw");
 
         // 사용자 정보 확인
-        int isUser = guestDAO.userCheck(id, pw);
+        int isUser = userDAO.userCheck(id, pw, 0);
         
         // 사용자 정보 설정
         req.setAttribute("isUser", isUser);
-        req.setAttribute("id", id);
+        req.getSession().setAttribute("id", id);
     }
     
     // 로그인 처리 완료
     @Override
-    public void loginComplete(HttpServletRequest req, HttpServletResponse res) {
+    public void makeSession(HttpServletRequest req, HttpServletResponse res) {
         Log.i("SERVICE", this.toString());
         
         // 로그인한 회원 정보 가져오기
-        String id = req.getParameter("id").toString();
+        String id = req.getSession().getAttribute("id").toString();
+        req.getSession().setAttribute("id", "");
+        
         vo = new UserVO();
-        vo = guestDAO.getGuestInfo(id);
+        vo = userDAO.getUserData(id);
         
         // 로그인 결과 세션에 적용
         req.getSession().setAttribute("vo", vo);
@@ -109,10 +103,10 @@ public class GuestServiceImpl implements GuestService {
         vo = (UserVO) req.getSession().getAttribute("vo");
         
         // 삭제요청
-        int isDeleted = guestDAO.deleteGuest(vo.getEmail());
+        int isDeleted = userDAO.deleteUser(vo.getEmail());
         if (isDeleted == 1) {
             req.getSession().invalidate();
-            adminDAO.surveyResult(req.getParameter("reason").toString());
+            userDAO.survey(req.getParameter("reason").toString());
         }
         
         // 삭제 결과
@@ -121,11 +115,13 @@ public class GuestServiceImpl implements GuestService {
 
     // 회원정보 수정
     @Override
-    public void editAction(HttpServletRequest req, HttpServletResponse res) {
+    public void modifyAction(HttpServletRequest req, HttpServletResponse res) {
         Log.i("SERVICE", this.toString());
         
         // 수정 항목 받아와서 적용
         UserVO updateVO = (UserVO) req.getSession().getAttribute("vo");
+        String email = vo.getEmail();
+        
         updateVO.setName(req.getParameter("name"));
         if (!req.getParameter("rePw1").isEmpty()) {
             updateVO.setPw(req.getParameter("rePw1")); 
@@ -135,86 +131,32 @@ public class GuestServiceImpl implements GuestService {
         updateVO.setTel(req.getParameter("reTel")); 
         
         // 업데이트 요청
-        int isUpdated = guestDAO.updateGuest(updateVO);
+        int isUpdated = userDAO.modifyUser(updateVO);
         
         // 업데이트 결과
         req.setAttribute("isUpdated", isUpdated);
-    }
-
-    // 회원 정보 완료 후 세션 재정렬
-    @Override
-    public void editComplete(HttpServletRequest req, HttpServletResponse res) {
-        Log.i("SERVICE", this.toString());
-        
-        // 수정된 사용자 정보 획득
-        vo = (UserVO) req.getSession().getAttribute("vo");
-        String email = vo.getEmail();
-        
-        // 업데이트 요청
-        vo = guestDAO.getGuestInfo(email);
-        
-        // 업데이트 결과
-        req.getSession().setAttribute("vo", vo);
+        if (isUpdated == 1) {
+            vo = userDAO.getUserData(email);
+            req.getSession().setAttribute("vo", vo);
+        }
     }
 
     // 비밀번호 확인
     @Override
-    public void confirmPw(HttpServletRequest req, HttpServletResponse res) {
+    public void checkPW(HttpServletRequest req, HttpServletResponse res) {
         Log.i("SERVICE", this.toString());
         
         // 비밀번호 확인
-        int chkPW = 0;
+        int isPass = 0;
         vo = (UserVO) req.getSession().getAttribute("vo");
         String pw = vo.getPw();
         String inputPw = req.getParameter("pw");
         
         // 업데이트 요청
-        if (pw.equals(inputPw)) chkPW = 1;
+        if (pw.equals(inputPw)) isPass = 1;
         
         // 업데이트 결과
-        req.setAttribute("chkPW", chkPW);
-    }
-
-    // 문의하기
-    @Override
-    public void inquireAction(HttpServletRequest req, HttpServletResponse res) {
-        
-    }
-
-    // 문의 수정/삭제 페이지
-    @Override
-    public void inquireModify(HttpServletRequest req, HttpServletResponse res) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    // 상품목록 가져오기
-    @Override
-    public void productList(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().getName(), "productList");
-        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
-        
-        List<ProductVO> list = (ArrayList<ProductVO>) guestDAO.productList(categoryId);
-        
-        req.setAttribute("list", list);
-    }
-
-    // 상품 상세 정보 보기
-    @Override
-    public void productDetail(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().getName(), "productDetail");
-        int productId = Integer.parseInt(req.getParameter("id"));
-        ProductVO vo = guestDAO.productDetail(productId);
-        
-        req.getSession().setAttribute("ProductVO", vo);
-    }
-
-    @Override
-    public void categoryList(HttpServletRequest req, HttpServletResponse res) {
-        Log.i(this.getClass().getName(), "productList");
-        List<CategoryVO> list = (ArrayList<CategoryVO>) guestDAO.categoryList();
-        
-        req.getSession().setAttribute("categoryList", list);
+        req.setAttribute("isPass", isPass);
     }
 
     // 
@@ -229,7 +171,7 @@ public class GuestServiceImpl implements GuestService {
         vo.setUserID(user.getEmail());
         vo.setReceiverName(req.getParameter("userName"));
         
-        int isInsert = guestDAO.addArrivalAddr(vo);
+        int isInsert = userDAO.addArrivalAddr(vo);
         
         req.setAttribute("isInsert", isInsert);
         req.setAttribute("nextPage", "arrivalAddr.gu");

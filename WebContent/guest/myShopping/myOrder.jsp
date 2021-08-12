@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@ include file="/guest/account/page/styleSettings.jsp"%>
+<%@ include file="/guest/account/styleSettings.jsp"%>
 </head>
 <body onload="checkAlert();">
 	<c:choose>
@@ -19,7 +19,7 @@
 					<!-- content -->
 					<div class="main_body">
 						<div class="headline">
-							<h3>2021. 7.15.</h3>
+							<h3>2021. 7. 15.</h3>
 						</div>
 						<table border="1px">
 							<tr>

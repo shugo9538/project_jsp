@@ -12,8 +12,7 @@ public class QnaVO {
     private int queryId;
     private String qnaTitle;
     private String userName;
-    private String qnaImg1;
-    private String qnaImg2;
+    private String qnaImg;
     private int answer_id;
     private int answer_level;
     private int answer_cnt;
@@ -42,20 +41,12 @@ public class QnaVO {
         this.answer_cnt = answer_cnt;
     }
 
-    public String getQnaImg1() {
-        return qnaImg1;
+    public String getQnaImg() {
+        return qnaImg;
     }
 
-    public void setQnaImg1(String qnaImg1) {
-        this.qnaImg1 = qnaImg1;
-    }
-
-    public String getQnaImg2() {
-        return qnaImg2;
-    }
-
-    public void setQnaImg2(String qnaImg2) {
-        this.qnaImg2 = qnaImg2;
+    public void setQnaImg(String qnaImg1) {
+        this.qnaImg = qnaImg1;
     }
 
     public String getQnaTitle() {

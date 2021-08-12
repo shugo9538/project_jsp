@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form action="stockAddAction.adm" method="post" enctype="multipart/form-data">
+<form action="stockAddAction.pr" method="post" enctype="multipart/form-data">
 	<legend>상품 추가</legend>
 	<fieldset>
 		<table>

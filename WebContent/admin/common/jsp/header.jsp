@@ -8,7 +8,9 @@
 				<li onclick="window.location='logout.adm'">로그아웃</li>
 			</ul>
 		</c:if>
+		
 		<c:if test="${sessionScope.vo eq null}">
+			<% request.getSession().invalidate(); %>
 			<script>
                 alert("비정상적인 접근입니다.");
                 window.location = "admin.adm";

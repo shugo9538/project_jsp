@@ -106,3 +106,7 @@ function formChk() {
         return false;
     }
 }
+
+function order(id, cnt) {
+    window.location="order.od?productId="+id+"&cnt="+cnt;
+}

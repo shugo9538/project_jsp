@@ -4,7 +4,7 @@
 		<ul>
 			<c:forEach items="${sessionScope.categoryList}" var="vo">
 				<li>
-					<a href="productList.gu?categoryId=${vo.getCategoryId()}"> ${vo.getCategoryName()} </a>
+					<a href="productList.pr?categoryId=${vo.getCategoryId()}"> ${vo.getCategoryName()} </a>
 				</li>
 			</c:forEach>
 		</ul>
